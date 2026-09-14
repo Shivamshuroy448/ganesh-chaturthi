@@ -318,7 +318,7 @@
                 </button>
 
                 <!-- 3. Flower Shower (Pula Varsham) -->
-                <button onclick="showerFlowers(50)" class="relative group overflow-hidden px-2.5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-br from-rose-600 via-red-600 to-amber-700 hover:from-rose-500 hover:to-amber-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-0.5 shadow-md shadow-rose-600/30 active:scale-95 transition-all">
+                <button onclick="triggerPulaVarsham()" class="relative group overflow-hidden px-2.5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-br from-rose-600 via-red-600 to-amber-700 hover:from-rose-500 hover:to-amber-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-0.5 shadow-md shadow-rose-600/30 active:scale-95 transition-all">
                     <div class="flex items-center gap-1">
                         <span class="text-sm sm:text-base group-hover:scale-125 transition-transform">🌸</span>
                         <span>Pula Varsham</span>
@@ -617,11 +617,12 @@
 
         const particles = [];
         const flowerColors = [
-            '#f59e0b',
-            '#fbbf24',
-            '#ef4444',
-            '#dc2626',
-            '#f97316'
+            '#f59e0b', // Marigold Yellow (Banthi)
+            '#fbbf24', // Golden Saffron
+            '#f97316', // Deep Orange
+            '#ef4444', // Red Rose (Gulaabi)
+            '#ec4899', // Sacred Pink Lotus (Kamalamu)
+            '#fef08a'  // Chameli Jasmine White
         ];
 
         for (let i = 0; i < 40; i++) {
@@ -636,20 +637,46 @@
             });
         }
 
+        // Pushpanjali: Strictly drops directly onto Lord Ganesha's murti
         function showerFlowers(count = 35) {
+            const ganeshaImg = document.getElementById('ganeshaImg');
+            const rect = ganeshaImg ? ganeshaImg.getBoundingClientRect() : null;
+
+            // Strict horizontal bounds of Lord Ganesha idol
+            const idolLeft = rect ? rect.left + 8 : width * 0.35;
+            const idolRight = rect ? rect.right - 8 : width * 0.65;
+            const idolWidth = Math.max(120, idolRight - idolLeft);
+            const idolTop = rect ? rect.top : height * 0.15;
+            const idolBottom = rect ? rect.bottom : height * 0.78;
+
             for (let i = 0; i < count; i++) {
+                // Focus spawn directly above Lord Ganesha's crown
+                const spawnX = idolLeft + (idolWidth * 0.15) + (Math.random() * (idolWidth * 0.7));
+                const spawnY = Math.max(-25, idolTop - 20 - Math.random() * 85);
+
                 particles.push({
                     type: 'petal',
-                    x: Math.random() * width,
-                    y: -30 - Math.random() * 100,
-                    size: Math.random() * 10 + 8,
+                    x: spawnX,
+                    y: spawnY,
+                    minX: idolLeft,
+                    maxX: idolRight,
+                    targetY: idolBottom - 6 - Math.random() * 22,
+                    size: Math.random() * 7.5 + 5.5,
                     color: flowerColors[Math.floor(Math.random() * flowerColors.length)],
-                    speedY: Math.random() * 2.8 + 2.0,
-                    speedX: (Math.random() - 0.5) * 2.2,
+                    speedY: Math.random() * 2.2 + 1.8,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    sway: Math.random() * Math.PI * 2,
+                    swaySpeed: Math.random() * 0.04 + 0.02,
                     rotation: Math.random() * Math.PI * 2,
-                    rotSpeed: (Math.random() - 0.5) * 0.08
+                    rotSpeed: (Math.random() - 0.5) * 0.06,
+                    alpha: 1.0
                 });
             }
+        }
+
+        function triggerPulaVarsham() {
+            playBellChime(659.25, 2.2);
+            showerFlowers(48);
         }
 
         function animateParticles() {
@@ -678,16 +705,35 @@
                     ctx.restore();
 
                 } else if (p.type === 'petal') {
-                    p.y += p.speedY;
-                    p.x += p.speedX;
                     p.rotation += p.rotSpeed;
+                    p.sway += p.swaySpeed;
 
-                    if (p.y > height + 20) {
+                    // Petals sway gently strictly across Ganesha's body
+                    p.x += Math.sin(p.sway) * 0.7 + p.speedX;
+                    if (p.x < p.minX) {
+                        p.x = p.minX;
+                        p.speedX = Math.abs(p.speedX) * 0.35;
+                    } else if (p.x > p.maxX) {
+                        p.x = p.maxX;
+                        p.speedX = -Math.abs(p.speedX) * 0.35;
+                    }
+
+                    p.y += p.speedY;
+
+                    // When petal reaches Lord Ganesha's lotus feet / pedestal, fade out gracefully
+                    if (p.y >= p.targetY) {
+                        p.speedY *= 0.6; // decelerate gently upon touching pedestal
+                        p.alpha -= 0.04; // dissolve softly at lotus feet
+                    }
+
+                    // Remove when fully dissolved or reaches pedestal end
+                    if (p.alpha <= 0 || p.y > p.targetY + 25) {
                         particles.splice(i, 1);
                         continue;
                     }
 
                     ctx.save();
+                    ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
                     ctx.translate(p.x, p.y);
                     ctx.rotate(p.rotation);
                     ctx.beginPath();
