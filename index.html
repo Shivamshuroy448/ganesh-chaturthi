@@ -208,7 +208,7 @@
 
             <!-- Soft Warm Halo Glow Behind Crown -->
             <div class="absolute top-[5%] left-1/2 -translate-x-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[460px] md:h-[460px] rounded-full pointer-events-none z-0">
-                <div id="divineAuraGlow" class="w-full h-full rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.38)_0%,rgba(217,119,6,0.20)_50%,transparent_75%)] animate-halo-soft blur-xl sm:blur-2xl"></div>
+                <div id="divineAuraGlow" class="w-full h-full rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.38)_0%,rgba(217,119,6,0.20)_50%,transparent_75%)] animate-halo-soft blur-xl sm:blur-2xl transition-all duration-700"></div>
             </div>
 
             <!-- Left Realistic Brass Standing Diya Lamp (Kuthuvilakku - Small & 100% Stable) -->
@@ -284,11 +284,11 @@
 
     <!-- BOTTOM ACTION BAR: TELUGU IN ENGLISH CONTROLS -->
     <footer class="relative z-30 w-full px-3 sm:px-6 pb-2.5 sm:pb-3 pt-0.5 flex-shrink-0">
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto relative">
             
-            <!-- Real-time Harathi Chants Subtitle (Telugu in English Script) -->
-            <div id="aartiLyricsBox" class="text-center mb-1 hidden">
-                <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-red-950/80 border border-red-500/40 shadow-lg text-amber-200 font-serif text-[11px] sm:text-xs animate-pulse">
+            <!-- Real-time Harathi Chants Subtitle (Telugu in English Script - Floating with 0px layout shift) -->
+            <div id="aartiLyricsBox" class="absolute -top-8 sm:-top-9 left-1/2 -translate-x-1/2 text-center pointer-events-none z-30 transition-all duration-300 opacity-0 pointer-events-none">
+                <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-red-950/90 border border-red-500/50 shadow-lg text-amber-200 font-serif text-[11px] sm:text-xs animate-pulse whitespace-nowrap">
                     <span>🪔</span>
                     <span id="aartiLyricText">Shuklam Baradharam Vishnum Shashivarnam Chaturbhujam...</span>
                     <span>🪔</span>
@@ -526,8 +526,9 @@
                 thali.classList.add('animate-aarti-legs');
                 btnLabel.textContent = 'Pause Harathi';
                 btnGlow.classList.remove('opacity-0');
-                lyricsBox.classList.remove('hidden');
-                auraGlow.classList.add('scale-125', 'bg-amber-400/40');
+                lyricsBox.classList.remove('opacity-0', 'pointer-events-none');
+                lyricsBox.classList.add('opacity-100');
+                auraGlow.classList.add('brightness-125');
 
                 let bellPitch = true;
                 aartiTimer = setInterval(() => {
@@ -549,8 +550,9 @@
                 container.classList.add('hidden');
                 btnLabel.textContent = 'Perform Harathi';
                 btnGlow.classList.add('opacity-0');
-                lyricsBox.classList.add('hidden');
-                auraGlow.classList.remove('scale-125', 'bg-amber-400/40');
+                lyricsBox.classList.remove('opacity-100');
+                lyricsBox.classList.add('opacity-0', 'pointer-events-none');
+                auraGlow.classList.remove('brightness-125');
             }
         }
 
