@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Vinayaka Chavithi Subhakankshalu | Virtual Darshan, Harathi & Laddu Prasadam</title>
     <meta name="description" content="Vinayaka Chavithi Subhakankshalu! Experience authentic 3D divine virtual darshan of Lord Ganesha idol with realistic brass lamps, small Harathi near lotus feet, and grand Laddu offering.">
 
@@ -18,6 +18,9 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    screens: {
+                        'xs': '420px',
+                    },
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
                         cinzel: ['Cinzel', 'serif']
@@ -145,31 +148,31 @@
     </div>
 
     <!-- TOP NAVIGATION: TELUGU IN ENGLISH SCRIPT -->
-    <header class="relative z-30 w-full px-3 sm:px-6 pt-2 sm:pt-3 pb-1 flex-shrink-0">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <header class="relative z-30 w-full px-2 sm:px-6 pt-1.5 sm:pt-3 pb-1 flex-shrink-0" style="padding-top: max(0.375rem, env(safe-area-inset-top)); padding-left: max(0.5rem, env(safe-area-inset-left)); padding-right: max(0.5rem, env(safe-area-inset-right));">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
             <!-- Left: Title -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-red-600 flex items-center justify-center text-base sm:text-lg shadow-md shadow-amber-500/20 border border-amber-400/40">
+            <div class="flex items-center gap-1.5 sm:gap-3 min-w-0">
+                <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-red-600 flex items-center justify-center text-sm sm:text-lg shadow-md shadow-amber-500/20 border border-amber-400/40 flex-shrink-0">
                     🕉️
                 </div>
-                <div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-[10px] sm:text-xs text-amber-400 font-bold tracking-wider font-mono">|| Sri Ganeshayanamaha ||</span>
-                        <span class="px-1.5 py-0.2 rounded-full bg-red-950/80 border border-red-500/40 text-[9px] text-red-300 font-semibold uppercase tracking-wider animate-pulse">
+                <div class="min-w-0">
+                    <div class="flex items-center gap-1 sm:gap-1.5">
+                        <span class="text-[9px] sm:text-xs text-amber-400 font-bold tracking-wider font-mono truncate">|| Sri Ganeshayanamaha ||</span>
+                        <span class="hidden sm:inline-block px-1.5 py-0.2 rounded-full bg-red-950/80 border border-red-500/40 text-[9px] text-red-300 font-semibold uppercase tracking-wider animate-pulse flex-shrink-0">
                             Vinayaka Chavithi
                         </span>
                     </div>
-                    <h1 class="text-sm sm:text-lg md:text-xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-100 leading-tight">
+                    <h1 class="text-xs sm:text-lg md:text-xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-100 leading-tight truncate">
                         Vinayaka Chavithi Subhakankshalu
                     </h1>
                 </div>
             </div>
 
             <!-- Right Controls: Play Devotional Song & Share -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-                <button id="songToggleBtn" onclick="toggleSong()" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-950/80 via-amber-900/80 to-red-950/80 hover:from-amber-900 hover:to-red-900 border border-amber-500/40 text-amber-200 hover:text-white transition-all flex items-center gap-1.5 text-[11px] font-medium group active:scale-95 shadow-md shadow-amber-950/30" title="Play Traditional Ganesh Aarti (Lalbaugcha Raja)">
-                    <span id="songIcon" class="text-xs group-hover:scale-110 transition-transform">🎵</span>
-                    <span class="font-sans font-semibold text-[10px] sm:text-[11px]" id="songBtnText">Play Song</span>
+            <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                <button id="songToggleBtn" onclick="toggleSong()" class="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-amber-950/80 via-amber-900/80 to-red-950/80 hover:from-amber-900 hover:to-red-900 border border-amber-500/40 text-amber-200 hover:text-white transition-all flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-medium group active:scale-95 shadow-md shadow-amber-950/30" title="Play Traditional Ganesh Aarti (Lalbaugcha Raja)">
+                    <span id="songIcon" class="text-[11px] sm:text-xs group-hover:scale-110 transition-transform">🎵</span>
+                    <span class="font-sans font-semibold text-[10px] sm:text-[11px] whitespace-nowrap" id="songBtnText">Play Song</span>
                     <span id="songEqualizer" class="hidden items-end gap-0.5 h-2.5 ml-0.5">
                         <span class="w-0.5 h-full bg-amber-400 rounded-full animate-pulse"></span>
                         <span class="w-0.5 h-2/3 bg-amber-300 rounded-full animate-bounce"></span>
@@ -177,8 +180,8 @@
                     </span>
                 </button>
 
-                <button onclick="shareDarshan()" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-bold text-[11px] flex items-center gap-1.5 transition-all shadow-md shadow-amber-600/30">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                <button onclick="shareDarshan()" class="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-bold text-[10px] sm:text-[11px] flex items-center gap-1 sm:gap-1.5 transition-all shadow-md shadow-amber-600/30 flex-shrink-0">
+                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                     <span>Share</span>
                 </button>
             </div>
@@ -189,31 +192,31 @@
     <main class="relative z-10 flex-1 flex flex-col items-center justify-between px-2 sm:px-4 py-0 min-h-0 overflow-hidden">
 
         <!-- Hanging Temple Bells on Left & Right + Slokam -->
-        <div class="w-full max-w-3xl relative flex justify-between items-start pointer-events-none z-30 px-3 sm:px-8 mb-[-8px] sm:mb-[-12px] flex-shrink-0">
+        <div class="w-full max-w-3xl relative flex justify-between items-start pointer-events-none z-30 px-2 sm:px-8 mb-[-4px] sm:mb-[-12px] flex-shrink-0">
             <div id="leftBell" onclick="ringLeftBell()" class="pointer-events-auto cursor-pointer group flex flex-col items-center select-none" title="Ganta moginchandi">
-                <div class="w-1 h-6 sm:h-10 bg-gradient-to-b from-amber-800 via-amber-600 to-yellow-500 rounded-sm"></div>
-                <div class="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-700 rounded-b-xl rounded-t-md border border-amber-300 shadow-md shadow-amber-500/50 flex flex-col items-center justify-end pb-0.5 group-hover:scale-105 transition-transform">
-                    <div class="w-2 h-2 bg-yellow-200 rounded-full shadow-inner"></div>
+                <div class="w-0.5 sm:w-1 h-4 sm:h-10 bg-gradient-to-b from-amber-800 via-amber-600 to-yellow-500 rounded-sm"></div>
+                <div class="w-6 h-6 sm:w-9 sm:h-9 bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-700 rounded-b-xl rounded-t-md border border-amber-300 shadow-md shadow-amber-500/50 flex flex-col items-center justify-end pb-0.5 group-hover:scale-105 transition-transform">
+                    <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-200 rounded-full shadow-inner"></div>
                 </div>
-                <span class="text-[8px] font-mono text-amber-400/80 mt-0.5 opacity-70 group-hover:opacity-100 transition-opacity">🔔 Ganta</span>
+                <span class="text-[7px] sm:text-[8px] font-mono text-amber-400/80 mt-0.5 opacity-70 group-hover:opacity-100 transition-opacity">🔔 Ganta</span>
             </div>
 
             <!-- Sacred Telugu Dhyana Slokam in English Script -->
-            <div class="pointer-events-auto text-center px-3 py-1 rounded-full glass-gold max-w-md mx-auto transform -translate-y-0.5">
-                <p id="mantraText" class="text-[11px] sm:text-xs text-amber-300 font-bold tracking-wide font-serif truncate">
+            <div class="pointer-events-auto text-center px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full glass-gold max-w-[210px] sm:max-w-md mx-auto transform -translate-y-0.5">
+                <p id="mantraText" class="text-[9px] sm:text-xs text-amber-300 font-bold tracking-wide font-serif truncate">
                     Shuklam Baradharam Vishnum Shashivarnam Chaturbhujam |
                 </p>
-                <p id="mantraMeaning" class="text-[9px] sm:text-[10px] text-amber-400/80 font-sans leading-tight">
+                <p id="mantraMeaning" class="hidden sm:block text-[9px] sm:text-[10px] text-amber-400/80 font-sans leading-tight">
                     "Prasanna Vadanam Dhyayet Sarva Vighnopa Shantaye — Vignaharta aashissulu mee thodundali!"
                 </p>
             </div>
 
             <div id="rightBell" onclick="ringRightBell()" class="pointer-events-auto cursor-pointer group flex flex-col items-center select-none" title="Ganta moginchandi">
-                <div class="w-1 h-6 sm:h-10 bg-gradient-to-b from-amber-800 via-amber-600 to-yellow-500 rounded-sm"></div>
-                <div class="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-700 rounded-b-xl rounded-t-md border border-amber-300 shadow-md shadow-amber-500/50 flex flex-col items-center justify-end pb-0.5 group-hover:scale-105 transition-transform">
-                    <div class="w-2 h-2 bg-yellow-200 rounded-full shadow-inner"></div>
+                <div class="w-0.5 sm:w-1 h-4 sm:h-10 bg-gradient-to-b from-amber-800 via-amber-600 to-yellow-500 rounded-sm"></div>
+                <div class="w-6 h-6 sm:w-9 sm:h-9 bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-700 rounded-b-xl rounded-t-md border border-amber-300 shadow-md shadow-amber-500/50 flex flex-col items-center justify-end pb-0.5 group-hover:scale-105 transition-transform">
+                    <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-200 rounded-full shadow-inner"></div>
                 </div>
-                <span class="text-[8px] font-mono text-amber-400/80 mt-0.5 opacity-70 group-hover:opacity-100 transition-opacity">🔔 Ganta</span>
+                <span class="text-[7px] sm:text-[8px] font-mono text-amber-400/80 mt-0.5 opacity-70 group-hover:opacity-100 transition-opacity">🔔 Ganta</span>
             </div>
         </div>
 
@@ -221,60 +224,60 @@
         <div class="relative w-full max-w-4xl flex items-end justify-center my-auto flex-1 min-h-0 pt-1 pb-1">
 
             <!-- Soft Warm Halo Glow Behind Crown -->
-            <div class="absolute top-[5%] left-1/2 -translate-x-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[460px] md:h-[460px] rounded-full pointer-events-none z-0">
-                <div id="divineAuraGlow" class="w-full h-full rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.38)_0%,rgba(217,119,6,0.20)_50%,transparent_75%)] animate-halo-soft blur-xl sm:blur-2xl transition-all duration-700"></div>
+            <div class="absolute top-[4%] left-1/2 -translate-x-1/2 w-[220px] h-[220px] sm:w-[360px] sm:h-[360px] md:w-[460px] md:h-[460px] rounded-full pointer-events-none z-0">
+                <div id="divineAuraGlow" class="w-full h-full rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.38)_0%,rgba(217,119,6,0.20)_50%,transparent_75%)] animate-halo-soft blur-lg sm:blur-2xl transition-all duration-700"></div>
             </div>
 
             <!-- Left Realistic Brass Standing Diya Lamp (Kuthuvilakku - Small & 100% Stable) -->
-            <div class="relative z-10 flex flex-col items-center select-none mr-[-4px] sm:mr-[-8px] md:mr-[-12px] mb-1 sm:mb-2 flex-shrink-0">
-                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="h-[14vh] sm:h-[18vh] md:h-[21vh] max-h-[190px] w-auto animate-deepam-stable pointer-events-none select-none object-contain">
+            <div class="relative z-10 flex flex-col items-center select-none mr-[-6px] sm:mr-[-8px] md:mr-[-12px] mb-1 sm:mb-2 flex-shrink-0">
+                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="h-[12vh] sm:h-[16vh] md:h-[21vh] max-h-[140px] sm:max-h-[190px] w-auto animate-deepam-stable pointer-events-none select-none object-contain">
             </div>
 
             <!-- CENTRAL SOLID REALISTIC 3D GANESHA IDOL (MURTI) -->
             <div class="relative z-15 flex flex-col items-center select-none flex-shrink min-h-0">
                 <!-- Authentic Handcrafted Clay Murti with Pedestal -->
                 <div class="relative flex flex-col items-center min-h-0">
-                    <img id="ganeshaImg" src="assets/realistic_ganesh_transparent.png" alt="Authentic Handcrafted 3D Lord Ganesha Murti" class="h-[49vh] sm:h-[55vh] md:h-[62vh] max-h-[600px] w-auto object-contain pointer-events-none drop-shadow-[0_25px_35px_rgba(0,0,0,0.95)]">
+                    <img id="ganeshaImg" src="assets/realistic_ganesh_transparent.png" alt="Authentic Handcrafted 3D Lord Ganesha Murti" class="h-[40vh] sm:h-[48vh] md:h-[58vh] max-h-[560px] max-w-[85vw] sm:max-w-none w-auto object-contain pointer-events-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.95)]">
 
                     <!-- Subtle divine Abhaya Mudra palm blessing glow -->
-                    <div id="blessingGlow" class="absolute top-[42%] left-[27%] w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-yellow-300/40 blur-md pointer-events-none opacity-50 animate-[blessingGlowPulse_3s_infinite]"></div>
+                    <div id="blessingGlow" class="absolute top-[42%] left-[27%] w-8 h-8 sm:w-16 sm:h-16 rounded-full bg-yellow-300/40 blur-md pointer-events-none opacity-50 animate-[blessingGlowPulse_3s_infinite]"></div>
 
                     <!-- Grounded Pedestal Shadow on Stone Floor -->
-                    <div class="w-full h-5 sm:h-7 rounded-full bg-black/80 blur-md -mt-2 sm:-mt-3"></div>
+                    <div class="w-full h-4 sm:h-7 rounded-full bg-black/80 blur-md -mt-2 sm:-mt-3"></div>
                 </div>
 
                 <!-- ========================================== -->
                 <!-- SMALL HARATHI DIYA (AT LOTUS FEET & LEGS) -->
                 <!-- ========================================== -->
-                <div id="aartiContainer" class="absolute -bottom-2 sm:bottom-0 left-1/2 -translate-x-1/2 z-40 hidden pointer-events-none select-none">
+                <div id="aartiContainer" class="absolute -bottom-1 sm:bottom-0 left-1/2 -translate-x-1/2 z-40 hidden pointer-events-none select-none">
                     <div id="aartiThali" class="relative pointer-events-none select-none">
                         <!-- Delicate, compact transparent brass Panch Aarti Diya near feet -->
-                        <img src="assets/aarti_transparent.png" alt="Panch Harathi Diya Lamp" class="w-20 sm:w-24 md:w-28 h-auto pointer-events-none drop-shadow-[0_0_20px_rgba(245,158,11,1)] drop-shadow-[0_0_40px_rgba(220,38,38,0.75)]">
+                        <img src="assets/aarti_transparent.png" alt="Panch Harathi Diya Lamp" class="w-16 sm:w-24 md:w-28 h-auto pointer-events-none drop-shadow-[0_0_20px_rgba(245,158,11,1)] drop-shadow-[0_0_40px_rgba(220,38,38,0.75)]">
                     </div>
                 </div>
 
                 <!-- ========================================== -->
                 <!-- GRAND VINAYAKA LADDU PRASADAM (DISAPPEARS AFTER 5s) -->
                 <!-- ========================================== -->
-                <div id="prasadamContainer" class="absolute -bottom-3 sm:-bottom-1 left-1/2 -translate-x-1/2 z-35 transition-all duration-1000 transform translate-y-36 opacity-0 pointer-events-none select-none">
+                <div id="prasadamContainer" class="absolute -bottom-2 sm:-bottom-1 left-1/2 -translate-x-1/2 z-35 transition-all duration-1000 transform translate-y-36 opacity-0 pointer-events-none select-none">
                     <div class="relative pointer-events-none select-none flex flex-col items-center">
-                        <img src="assets/laddu_transparent.png" alt="Grand Vinayaka Boondi Laddu Prasadam" class="h-[12vh] sm:h-[15vh] max-h-[140px] w-auto object-contain drop-shadow-[0_0_35px_rgba(245,158,11,0.9)]">
+                        <img src="assets/laddu_transparent.png" alt="Grand Vinayaka Boondi Laddu Prasadam" class="h-[10vh] sm:h-[14vh] max-h-[130px] w-auto object-contain drop-shadow-[0_0_35px_rgba(245,158,11,0.9)]">
                     </div>
                 </div>
             </div>
 
             <!-- Right Realistic Brass Standing Diya Lamp (Kuthuvilakku - Small & 100% Stable, Flipped) -->
-            <div class="relative z-10 flex flex-col items-center select-none ml-[-4px] sm:ml-[-8px] md:ml-[-12px] mb-1 sm:mb-2 flex-shrink-0">
-                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="h-[14vh] sm:h-[18vh] md:h-[21vh] max-h-[190px] w-auto animate-deepam-stable pointer-events-none select-none transform -scale-x-100 object-contain">
+            <div class="relative z-10 flex flex-col items-center select-none ml-[-6px] sm:ml-[-8px] md:ml-[-12px] mb-1 sm:mb-2 flex-shrink-0">
+                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="h-[12vh] sm:h-[16vh] md:h-[21vh] max-h-[140px] sm:max-h-[190px] w-auto animate-deepam-stable pointer-events-none select-none transform -scale-x-100 object-contain">
             </div>
 
         </div>
 
         <!-- TELUGU BLESSINGS BANNER MODAL (AFTER LADDU / HARATHI) -->
-        <div id="blessingModal" class="fixed top-20 sm:top-24 z-50 transition-all duration-700 transform -translate-y-20 opacity-0 pointer-events-none max-w-md mx-4">
+        <div id="blessingModal" class="fixed top-16 sm:top-24 left-1/2 -translate-x-1/2 z-50 transition-all duration-700 transform -translate-y-20 opacity-0 pointer-events-none w-[90%] max-w-md">
             <div class="glass-gold p-3 sm:p-5 rounded-2xl text-center border-2 border-amber-400/70 shadow-2xl relative">
                 <button onclick="closeBlessingModal()" class="absolute top-2 right-2.5 text-amber-300/70 hover:text-white text-base">✕</button>
-                <div class="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-400/40 text-xl flex items-center justify-center mx-auto mb-1.5">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 border border-amber-400/40 text-lg sm:text-xl flex items-center justify-center mx-auto mb-1.5">
                     🥟
                 </div>
                 <h3 id="blessingTitle" class="text-sm sm:text-base font-cinzel font-bold text-amber-300">
@@ -297,66 +300,66 @@
     </main>
 
     <!-- BOTTOM ACTION BAR: TELUGU IN ENGLISH CONTROLS -->
-    <footer class="relative z-30 w-full px-3 sm:px-6 pb-2.5 sm:pb-3 pt-0.5 flex-shrink-0">
+    <footer class="relative z-30 w-full px-2 sm:px-6 pb-1.5 sm:pb-3 pt-0.5 flex-shrink-0" style="padding-bottom: max(0.375rem, env(safe-area-inset-bottom)); padding-left: max(0.5rem, env(safe-area-inset-left)); padding-right: max(0.5rem, env(safe-area-inset-right));">
         <div class="max-w-3xl mx-auto relative">
             
             <!-- Real-time Harathi Chants Subtitle (Telugu in English Script - Floating with 0px layout shift) -->
-            <div id="aartiLyricsBox" class="absolute -top-8 sm:-top-9 left-1/2 -translate-x-1/2 text-center pointer-events-none z-30 transition-all duration-300 opacity-0 pointer-events-none">
-                <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-red-950/90 border border-red-500/50 shadow-lg text-amber-200 font-serif text-[11px] sm:text-xs animate-pulse whitespace-nowrap">
+            <div id="aartiLyricsBox" class="absolute -top-7 sm:-top-9 left-1/2 -translate-x-1/2 text-center pointer-events-none z-30 transition-all duration-300 opacity-0 pointer-events-none w-[90vw] sm:w-auto">
+                <div class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-0.5 rounded-full bg-red-950/90 border border-red-500/50 shadow-lg text-amber-200 font-serif text-[10px] sm:text-xs animate-pulse max-w-full">
                     <span>🪔</span>
-                    <span id="aartiLyricText">Shuklam Baradharam Vishnum Shashivarnam Chaturbhujam...</span>
+                    <span id="aartiLyricText" class="truncate">Shuklam Baradharam Vishnum Shashivarnam Chaturbhujam...</span>
                     <span>🪔</span>
                 </div>
             </div>
 
-            <!-- Action Controls Grid -->
-            <div class="glass-gold p-2 sm:p-2.5 rounded-2xl grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+            <!-- Action Controls Grid: 4 columns on all screens! -->
+            <div class="glass-gold p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl grid grid-cols-4 gap-1 sm:gap-2.5">
                 
                 <!-- 1. Perform Harathi (Small, near legs) -->
-                <button id="aartiBtn" onclick="toggleAarti()" class="relative group overflow-hidden px-2.5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 hover:from-amber-500 hover:to-red-500 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-0.5 shadow-md shadow-orange-600/30 active:scale-95 transition-all">
-                    <div class="flex items-center gap-1">
-                        <span class="text-sm sm:text-base group-hover:scale-125 transition-transform">🪔</span>
-                        <span id="aartiBtnLabel">Perform Harathi</span>
+                <button id="aartiBtn" onclick="toggleAarti()" class="relative group overflow-hidden px-1 sm:px-2.5 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 hover:from-amber-500 hover:to-red-500 text-white font-bold flex flex-col items-center justify-center gap-0.5 shadow-md shadow-orange-600/30 active:scale-95 transition-all text-center min-w-0">
+                    <div class="flex items-center justify-center gap-0.5 sm:gap-1 w-full">
+                        <span class="text-xs sm:text-base group-hover:scale-125 transition-transform flex-shrink-0">🪔</span>
+                        <span id="aartiBtnLabel" class="text-[10px] sm:text-xs md:text-sm font-bold truncate"><span class="hidden sm:inline">Perform </span>Harathi</span>
                     </div>
-                    <span class="text-[9px] sm:text-[10px] text-amber-200/90 font-mono font-normal">Harathi Ivvandi</span>
-                    <span id="aartiBtnGlow" class="absolute inset-0 border-2 border-yellow-300 rounded-xl opacity-0 transition-opacity"></span>
+                    <span class="hidden xs:block sm:block text-[8px] sm:text-[9px] text-amber-200/90 font-mono font-normal truncate w-full">Harathi Ivvandi</span>
+                    <span id="aartiBtnGlow" class="absolute inset-0 border-2 border-yellow-300 rounded-lg sm:rounded-xl opacity-0 transition-opacity"></span>
                 </button>
 
                 <!-- 2. Offer Laddu Prasadam -->
-                <button id="prasadamBtn" onclick="offerPrasadam()" class="relative group overflow-hidden px-2.5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-br from-yellow-600 via-amber-600 to-emerald-700 hover:from-yellow-500 hover:to-emerald-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-0.5 shadow-md shadow-amber-600/30 active:scale-95 transition-all">
-                    <div class="flex items-center gap-1">
-                        <span class="text-sm sm:text-base group-hover:scale-125 transition-transform">🥟</span>
-                        <span>Offer Laddu</span>
+                <button id="prasadamBtn" onclick="offerPrasadam()" class="relative group overflow-hidden px-1 sm:px-2.5 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-gradient-to-br from-yellow-600 via-amber-600 to-emerald-700 hover:from-yellow-500 hover:to-emerald-600 text-white font-bold flex flex-col items-center justify-center gap-0.5 shadow-md shadow-amber-600/30 active:scale-95 transition-all text-center min-w-0">
+                    <div class="flex items-center justify-center gap-0.5 sm:gap-1 w-full">
+                        <span class="text-xs sm:text-base group-hover:scale-125 transition-transform flex-shrink-0">🥟</span>
+                        <span class="text-[10px] sm:text-xs md:text-sm font-bold truncate"><span class="hidden sm:inline">Offer </span>Laddu</span>
                     </div>
-                    <span class="text-[9px] sm:text-[10px] text-amber-200/90 font-mono font-normal">Laddu Prasadam</span>
+                    <span class="hidden xs:block sm:block text-[8px] sm:text-[9px] text-amber-200/90 font-mono font-normal truncate w-full">Prasadam</span>
                 </button>
 
                 <!-- 3. Flower Shower (Pula Varsham) -->
-                <button onclick="triggerPulaVarsham()" class="relative group overflow-hidden px-2.5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-br from-rose-600 via-red-600 to-amber-700 hover:from-rose-500 hover:to-amber-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-0.5 shadow-md shadow-rose-600/30 active:scale-95 transition-all">
-                    <div class="flex items-center gap-1">
-                        <span class="text-sm sm:text-base group-hover:scale-125 transition-transform">🌸</span>
-                        <span>Pula Varsham</span>
+                <button onclick="triggerPulaVarsham()" class="relative group overflow-hidden px-1 sm:px-2.5 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-gradient-to-br from-rose-600 via-red-600 to-amber-700 hover:from-rose-500 hover:to-amber-600 text-white font-bold flex flex-col items-center justify-center gap-0.5 shadow-md shadow-rose-600/30 active:scale-95 transition-all text-center min-w-0">
+                    <div class="flex items-center justify-center gap-0.5 sm:gap-1 w-full">
+                        <span class="text-xs sm:text-base group-hover:scale-125 transition-transform flex-shrink-0">🌸</span>
+                        <span class="text-[10px] sm:text-xs md:text-sm font-bold truncate"><span class="hidden sm:inline">Pula </span>Varsham</span>
                     </div>
-                    <span class="text-[9px] sm:text-[10px] text-rose-200/90 font-mono font-normal">Flower Shower</span>
+                    <span class="hidden xs:block sm:block text-[8px] sm:text-[9px] text-rose-200/90 font-mono font-normal truncate w-full">Flower Shower</span>
                 </button>
 
                 <!-- 4. Ring Temple Bell (Ganta Moginchandi) -->
-                <button onclick="ringBothBells()" class="relative group overflow-hidden px-2.5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-br from-amber-700 via-yellow-700 to-amber-900 hover:from-amber-600 hover:to-yellow-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-0.5 shadow-md shadow-yellow-700/30 active:scale-95 transition-all">
-                    <div class="flex items-center gap-1">
-                        <span class="text-sm sm:text-base group-hover:scale-125 transition-transform">🔔</span>
-                        <span>Ring Bell</span>
+                <button onclick="ringBothBells()" class="relative group overflow-hidden px-1 sm:px-2.5 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-gradient-to-br from-amber-700 via-yellow-700 to-amber-900 hover:from-amber-600 hover:to-yellow-600 text-white font-bold flex flex-col items-center justify-center gap-0.5 shadow-md shadow-yellow-700/30 active:scale-95 transition-all text-center min-w-0">
+                    <div class="flex items-center justify-center gap-0.5 sm:gap-1 w-full">
+                        <span class="text-xs sm:text-base group-hover:scale-125 transition-transform flex-shrink-0">🔔</span>
+                        <span class="text-[10px] sm:text-xs md:text-sm font-bold truncate">Ring Bell</span>
                     </div>
-                    <span class="text-[9px] sm:text-[10px] text-yellow-200/90 font-mono font-normal">Ganta Moginchandi</span>
+                    <span class="hidden xs:block sm:block text-[8px] sm:text-[9px] text-yellow-200/90 font-mono font-normal truncate w-full">Ganta Moginchandi</span>
                 </button>
 
             </div>
 
-            <!-- Footer Telugu Devotional Wishes -->
-            <div class="mt-1 flex flex-col sm:flex-row items-center justify-between text-[10px] text-amber-400/80 font-mono gap-1">
-                <div>
-                    Mee andhariki <strong class="text-amber-300">Vinayaka Chavithi Subhakankshalu</strong>!
+            <!-- Footer Telugu Devotional Wishes (Single line on mobile, truncate cleanly) -->
+            <div class="mt-1 flex items-center justify-between text-[9px] sm:text-[10px] text-amber-400/80 font-mono px-1">
+                <div class="truncate">
+                    Mee andhariki <strong class="text-amber-300 font-semibold">Vinayaka Chavithi Subhakankshalu</strong>!
                 </div>
-                <div class="flex items-center gap-2 text-slate-400 text-[10px]">
+                <div class="hidden sm:flex items-center gap-2 text-slate-400 text-[10px] flex-shrink-0">
                     <span>🕉️ Jai Bolo Ganesh Maharaj Ki Jai!</span>
                     <span>•</span>
                     <span>Ganapathi Bappa Moriya!</span>
@@ -589,7 +592,7 @@
             if (isAartiActive) {
                 container.classList.remove('hidden');
                 thali.classList.add('animate-aarti-legs');
-                btnLabel.textContent = 'Pause Harathi';
+                btnLabel.innerHTML = '<span class="sm:hidden">Pause</span><span class="hidden sm:inline">Pause Harathi</span>';
                 btnGlow.classList.remove('opacity-0');
                 lyricsBox.classList.remove('opacity-0', 'pointer-events-none');
                 lyricsBox.classList.add('opacity-100');
@@ -614,7 +617,7 @@
                 clearInterval(aartiTimer);
                 thali.classList.remove('animate-aarti-legs');
                 container.classList.add('hidden');
-                btnLabel.textContent = 'Perform Harathi';
+                btnLabel.innerHTML = '<span class="sm:hidden">Harathi</span><span class="hidden sm:inline">Perform Harathi</span>';
                 btnGlow.classList.add('opacity-0');
                 lyricsBox.classList.remove('opacity-100');
                 lyricsBox.classList.add('opacity-0', 'pointer-events-none');
