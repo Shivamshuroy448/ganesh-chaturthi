@@ -52,186 +52,46 @@
             }
         }
 
-        /* Sacred Diya Flame Physics: Stable Lamp Base, Only Fire Moves! */
-        .sacred-flame {
-            position: relative;
-            transform-origin: 50% 95%;
-            filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 12px rgba(234, 88, 12, 0.75));
-        }
-
-        .sacred-flame .flame-body {
-            width: 10px;
-            height: 22px;
-            border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-            background: radial-gradient(ellipse at 50% 88%, #ffffff 0%, #fef9c3 15%, #fde047 30%, #f59e0b 60%, #ea580c 85%, #b91c1c 98%, transparent 100%);
-            position: relative;
-            box-shadow: 0 0 10px rgba(251, 191, 36, 0.8), 0 0 20px rgba(234, 88, 12, 0.5);
-        }
-
-        @media (min-width: 640px) {
-            .sacred-flame .flame-body {
-                width: 12px;
-                height: 25px;
-            }
-            .sacred-flame.flame-center .flame-body {
-                width: 15px;
-                height: 30px;
-            }
-        }
-
-        .sacred-flame.flame-center .flame-body {
-            width: 12px;
-            height: 26px;
-        }
-
-        /* White-hot inner core */
-        .sacred-flame .flame-body::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 9px;
-            border-radius: 50% 50% 35% 35%;
-            background: radial-gradient(ellipse at 50% 80%, #ffffff 0%, #fffbeb 60%, rgba(254, 240, 138, 0.4) 100%);
-            filter: blur(0.3px);
-        }
-
-        /* Blue oxygen-rich wick root */
-        .sacred-flame .flame-body::before {
-            content: '';
-            position: absolute;
-            bottom: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 3px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #38bdf8 0%, #0284c7 60%, transparent 100%);
-            opacity: 0.85;
-        }
-
-        /* 5 Independent Async Flame Animations: Realistic flicker, flutter, and breath */
-        @keyframes flameDance1 {
-            0%, 100% {
-                transform: scale(1, 1) rotate(-1.5deg) skewX(-1deg);
-                filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 12px rgba(234, 88, 12, 0.75));
+        /* Small Harathi circular motion near legs (Perform Harathi function) */
+        @keyframes aartiLegsMotion {
+            0% {
+                transform: translate(-50%, 0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 28px rgba(220, 38, 38, 0.7));
             }
             25% {
-                transform: scale(0.94, 1.06) rotate(2deg) skewX(1.5deg);
-                filter: drop-shadow(0 0 8px rgba(251, 191, 36, 1)) drop-shadow(0 0 16px rgba(249, 115, 22, 0.85));
+                transform: translate(calc(-50% + 28px), -10px) scale(1.04) rotate(3deg);
+                filter: drop-shadow(0 0 18px rgba(251, 191, 36, 1)) drop-shadow(0 0 35px rgba(234, 88, 12, 0.85));
             }
             50% {
-                transform: scale(1.05, 0.95) rotate(-0.8deg) skewX(-0.5deg);
-                filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.9)) drop-shadow(0 0 10px rgba(220, 38, 38, 0.6));
+                transform: translate(-50%, -20px) scale(1.07) rotate(0deg);
+                filter: drop-shadow(0 0 24px rgba(245, 158, 11, 1)) drop-shadow(0 0 45px rgba(220, 38, 38, 0.85));
             }
             75% {
-                transform: scale(0.97, 1.03) rotate(1.2deg) skewX(1deg);
-                filter: drop-shadow(0 0 7px rgba(254, 240, 138, 0.95)) drop-shadow(0 0 15px rgba(234, 88, 12, 0.8));
+                transform: translate(calc(-50% - 28px), -10px) scale(1.04) rotate(-3deg);
+                filter: drop-shadow(0 0 18px rgba(251, 191, 36, 1)) drop-shadow(0 0 35px rgba(234, 88, 12, 0.85));
+            }
+            100% {
+                transform: translate(-50%, 0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 28px rgba(220, 38, 38, 0.7));
             }
         }
 
-        @keyframes flameDance2 {
-            0%, 100% {
-                transform: scale(1, 1) rotate(1.8deg) skewX(1.2deg);
-                filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9)) drop-shadow(0 0 14px rgba(234, 88, 12, 0.7));
-            }
-            30% {
-                transform: scale(1.04, 0.96) rotate(-1.8deg) skewX(-1.2deg);
-                filter: drop-shadow(0 0 9px rgba(254, 240, 138, 1)) drop-shadow(0 0 18px rgba(249, 115, 22, 0.85));
-            }
-            65% {
-                transform: scale(0.95, 1.05) rotate(1deg) skewX(0.8deg);
-                filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.85)) drop-shadow(0 0 12px rgba(220, 38, 38, 0.65));
-            }
-            85% {
-                transform: scale(1.02, 0.98) rotate(-1deg) skewX(-0.6deg);
-                filter: drop-shadow(0 0 8px rgba(251, 191, 36, 1)) drop-shadow(0 0 16px rgba(234, 88, 12, 0.75));
-            }
+        .animate-aarti-legs {
+            animation: aartiLegsMotion 3.2s ease-in-out infinite;
         }
 
-        @keyframes flameDance3 {
+        /* 100% STABLE Standing Deepam Lamp (Zero movement, zero transform, only subtle light glow) */
+        @keyframes stableDeepamGlow {
             0%, 100% {
-                transform: scale(1, 1) rotate(0deg) skewX(0deg);
-                filter: drop-shadow(0 0 7px rgba(251, 191, 36, 1)) drop-shadow(0 0 18px rgba(234, 88, 12, 0.85));
-            }
-            20% {
-                transform: scale(0.93, 1.07) rotate(2deg) skewX(1.5deg);
-                filter: drop-shadow(0 0 11px rgba(254, 240, 138, 1)) drop-shadow(0 0 24px rgba(249, 115, 22, 0.95));
-            }
-            45% {
-                transform: scale(1.06, 0.94) rotate(-1.5deg) skewX(-1deg);
-                filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9)) drop-shadow(0 0 14px rgba(220, 38, 38, 0.7));
-            }
-            70% {
-                transform: scale(0.95, 1.05) rotate(1deg) skewX(0.5deg);
-                filter: drop-shadow(0 0 12px rgba(251, 191, 36, 1)) drop-shadow(0 0 25px rgba(234, 88, 12, 0.9));
-            }
-            90% {
-                transform: scale(1.03, 0.97) rotate(-0.6deg) skewX(-0.5deg);
-                filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 18px rgba(249, 115, 22, 0.8));
-            }
-        }
-
-        .flame-anim-1 { animation: flameDance1 0.73s infinite ease-in-out; }
-        .flame-anim-2 { animation: flameDance2 0.89s infinite ease-in-out; }
-        .flame-anim-3 { animation: flameDance3 0.79s infinite ease-in-out; }
-        .flame-anim-4 { animation: flameDance2 0.84s infinite ease-in-out reverse; }
-        .flame-anim-5 { animation: flameDance1 0.77s infinite ease-in-out reverse; }
-
-        /* Natural oil lamp flame flicker */
-        @keyframes naturalFlameFlicker {
-            0%, 100% {
-                opacity: 0.92;
-                transform: scale(1) rotate(-0.5deg);
-                filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.9)) drop-shadow(0 0 25px rgba(234, 88, 12, 0.6));
-            }
-            25% {
-                opacity: 1;
-                transform: scale(1.03, 0.97) rotate(1deg);
-                filter: drop-shadow(0 0 15px rgba(251, 191, 36, 1)) drop-shadow(0 0 32px rgba(234, 88, 12, 0.75));
+                filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.85)) drop-shadow(0 0 22px rgba(234, 88, 12, 0.55));
             }
             50% {
-                opacity: 0.88;
-                transform: scale(0.98, 1.02) rotate(-1deg);
-                filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.85)) drop-shadow(0 0 20px rgba(220, 38, 38, 0.55));
-            }
-            75% {
-                opacity: 0.98;
-                transform: scale(1.02, 0.99) rotate(0.8deg);
-                filter: drop-shadow(0 0 13px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 28px rgba(234, 88, 12, 0.7));
+                filter: drop-shadow(0 0 16px rgba(251, 191, 36, 1)) drop-shadow(0 0 30px rgba(249, 115, 22, 0.75));
             }
         }
 
-        /* Temple Bell swing animation */
-        @keyframes bellSwingLeft {
-            0%, 100% { transform: rotate(0deg); }
-            20% { transform: rotate(18deg); }
-            40% { transform: rotate(-14deg); }
-            60% { transform: rotate(8deg); }
-            80% { transform: rotate(-4deg); }
-        }
-
-        @keyframes bellSwingRight {
-            0%, 100% { transform: rotate(0deg); }
-            20% { transform: rotate(-18deg); }
-            40% { transform: rotate(14deg); }
-            60% { transform: rotate(-8deg); }
-            80% { transform: rotate(4deg); }
-        }
-
-        @keyframes blessingGlowPulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.85; transform: scale(1.18); }
-        }
-
-        .animate-halo-soft {
-            animation: softHaloPulse 5s ease-in-out infinite;
-        }
-
-        .animate-flame-natural {
-            animation: naturalFlameFlicker 1.1s ease-in-out infinite alternate;
+        .animate-deepam-stable {
+            animation: stableDeepamGlow 2.5s ease-in-out infinite alternate;
         }
 
         .swing-left {
@@ -344,9 +204,9 @@
                 <div id="divineAuraGlow" class="w-full h-full rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.35)_0%,rgba(217,119,6,0.18)_50%,transparent_75%)] animate-halo-soft blur-2xl"></div>
             </div>
 
-            <!-- Left Realistic Brass Standing Diya Lamp (Kuthuvilakku) -->
-            <div class="relative z-10 flex flex-col items-center select-none mr-[-15px] sm:mr-[-25px] md:mr-[-35px] mb-2 sm:mb-4">
-                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="w-16 sm:w-24 md:w-28 h-auto animate-flame-natural pointer-events-none drop-shadow-[0_0_20px_rgba(245,158,11,0.85)]">
+            <!-- Left Realistic Brass Standing Diya Lamp (Kuthuvilakku - Small & 100% Stable) -->
+            <div class="relative z-10 flex flex-col items-center select-none mr-[-6px] sm:mr-[-10px] md:mr-[-14px] mb-2 sm:mb-4">
+                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="w-10 sm:w-12 md:w-14 h-auto animate-deepam-stable pointer-events-none select-none">
             </div>
 
             <!-- CENTRAL SOLID REALISTIC 3D GANESHA IDOL (MURTI) -->
@@ -362,54 +222,13 @@
                     <div class="w-full h-6 rounded-full bg-black/80 blur-md -mt-3"></div>
                 </div>
 
-                <!-- ==================================================== -->
-                <!-- SMALL & STABLE HARATHI DIYA (ONLY THE FIRE MOVES!) -->
-                <!-- ==================================================== -->
+                <!-- ========================================== -->
+                <!-- SMALL HARATHI DIYA (AT LOTUS FEET & LEGS) -->
+                <!-- ========================================== -->
                 <div id="aartiContainer" class="absolute -bottom-2 sm:bottom-0 left-1/2 -translate-x-1/2 z-40 hidden pointer-events-none select-none">
-                    <!-- Delicate small brass Aarti lamp (100% Stable Base) -->
-                    <div id="aartiThali" class="relative pointer-events-none select-none w-20 sm:w-24 md:w-28 flex flex-col items-center">
-                        
-                        <!-- Ambient Warm Golden Glow behind flames -->
-                        <div class="absolute top-[52%] left-1/2 -translate-x-1/2 w-24 h-12 bg-amber-500/30 blur-lg rounded-full pointer-events-none animate-pulse"></div>
-
-                        <!-- 5 Sacred Dancing Flames (Only Fire Moves!) -->
-                        <!-- Wick 1 (Far Left) -->
-                        <div class="absolute left-[6.9%] top-[65.8%] -translate-x-1/2 -translate-y-[92%] z-20 pointer-events-none">
-                            <div class="sacred-flame flame-anim-1">
-                                <div class="flame-body"></div>
-                            </div>
-                        </div>
-
-                        <!-- Wick 2 (Mid Left) -->
-                        <div class="absolute left-[24.4%] top-[59.4%] -translate-x-1/2 -translate-y-[92%] z-20 pointer-events-none">
-                            <div class="sacred-flame flame-anim-2">
-                                <div class="flame-body"></div>
-                            </div>
-                        </div>
-
-                        <!-- Wick 3 (Center - Grand Aarti Flame) -->
-                        <div class="absolute left-[49.5%] top-[71.8%] -translate-x-1/2 -translate-y-[92%] z-20 pointer-events-none">
-                            <div class="sacred-flame flame-center flame-anim-3">
-                                <div class="flame-body"></div>
-                            </div>
-                        </div>
-
-                        <!-- Wick 4 (Mid Right) -->
-                        <div class="absolute left-[77.7%] top-[57.8%] -translate-x-1/2 -translate-y-[92%] z-20 pointer-events-none">
-                            <div class="sacred-flame flame-anim-4">
-                                <div class="flame-body"></div>
-                            </div>
-                        </div>
-
-                        <!-- Wick 5 (Far Right) -->
-                        <div class="absolute left-[94.6%] top-[66.2%] -translate-x-1/2 -translate-y-[92%] z-20 pointer-events-none">
-                            <div class="sacred-flame flame-anim-5">
-                                <div class="flame-body"></div>
-                            </div>
-                        </div>
-
-                        <!-- 100% STABLE Brass Panch Aarti Lamp Base (Rock-solid, Zero Movement) -->
-                        <img src="assets/aarti_brass_base.png" alt="Authentic Brass Panch Aarti Diya" class="w-full h-auto pointer-events-none select-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.95)]">
+                    <div id="aartiThali" class="relative pointer-events-none select-none">
+                        <!-- Delicate, compact transparent brass Panch Aarti Diya near feet -->
+                        <img src="assets/aarti_transparent.png" alt="Panch Harathi Diya Lamp" class="w-24 sm:w-28 md:w-32 h-auto pointer-events-none drop-shadow-[0_0_20px_rgba(245,158,11,1)] drop-shadow-[0_0_45px_rgba(220,38,38,0.75)]">
                     </div>
                 </div>
 
@@ -423,9 +242,9 @@
                 </div>
             </div>
 
-            <!-- Right Realistic Brass Standing Diya Lamp (Kuthuvilakku - Flipped) -->
-            <div class="relative z-10 flex flex-col items-center select-none ml-[-15px] sm:ml-[-25px] md:ml-[-35px] mb-2 sm:mb-4">
-                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="w-16 sm:w-24 md:w-28 h-auto animate-flame-natural pointer-events-none drop-shadow-[0_0_20px_rgba(245,158,11,0.85)] transform -scale-x-100">
+            <!-- Right Realistic Brass Standing Diya Lamp (Kuthuvilakku - Small & 100% Stable, Flipped) -->
+            <div class="relative z-10 flex flex-col items-center select-none ml-[-6px] sm:ml-[-10px] md:ml-[-14px] mb-2 sm:mb-4">
+                <img src="assets/real_standing_diya.png" alt="Traditional Brass Standing Kuthuvilakku Diya" class="w-10 sm:w-12 md:w-14 h-auto animate-deepam-stable pointer-events-none select-none transform -scale-x-100">
             </div>
 
         </div>
@@ -697,6 +516,7 @@
 
             if (isAartiActive) {
                 container.classList.remove('hidden');
+                thali.classList.add('animate-aarti-legs');
                 btnLabel.textContent = 'Pause Harathi';
                 btnGlow.classList.remove('opacity-0');
                 lyricsBox.classList.remove('hidden');
@@ -718,6 +538,7 @@
 
             } else {
                 clearInterval(aartiTimer);
+                thali.classList.remove('animate-aarti-legs');
                 container.classList.add('hidden');
                 btnLabel.textContent = 'Perform Harathi';
                 btnGlow.classList.add('opacity-0');
