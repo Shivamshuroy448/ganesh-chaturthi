@@ -625,34 +625,55 @@
         }
 
         // ==========================================
-        // 4. OFFER LADDU PRASADAM
+        // 4. OFFER LADDU PRASADAM (DISAPPEARS AFTER 5 SECONDS)
         // ==========================================
+        let prasadamDisappearTimer = null;
+
         function offerPrasadam() {
             const container = document.getElementById('prasadamContainer');
             const modal = document.getElementById('blessingModal');
             const blessingGlow = document.getElementById('blessingGlow');
 
+            // Clear any active timer if clicked again
+            if (prasadamDisappearTimer) {
+                clearTimeout(prasadamDisappearTimer);
+            }
+
             // Slide up the grand Laddu plate onto the altar
             container.classList.remove('translate-y-36', 'opacity-0');
             container.classList.add('translate-y-0', 'opacity-100');
 
+            // Brighten Lord Ganesha's blessing palm
             blessingGlow.classList.remove('opacity-60');
             blessingGlow.classList.add('opacity-100', 'scale-150');
 
+            // Chimes
             playBellChime(523.25, 2.0);
             setTimeout(() => playBellChime(659.25, 2.5), 250);
             setTimeout(() => playBellChime(783.99, 3.5), 500);
 
+            // Grand flower shower
             showerFlowers(60);
 
+            // Show blessing modal
             setTimeout(() => {
                 modal.classList.remove('-translate-y-20', 'opacity-0', 'pointer-events-none');
                 modal.classList.add('translate-y-0', 'opacity-100');
-            }, 900);
+            }, 800);
 
-            setTimeout(() => {
+            // Exactly after 5 seconds: Prasadam disappears (accepted by Lord Ganesha)
+            prasadamDisappearTimer = setTimeout(() => {
+                // Smoothly slide down & fade out
+                container.classList.remove('translate-y-0', 'opacity-100');
+                container.classList.add('translate-y-36', 'opacity-0');
+
+                // Return blessing glow to normal breathing state
+                blessingGlow.classList.remove('opacity-100', 'scale-150');
+                blessingGlow.classList.add('opacity-60');
+
+                // Close blessing modal
                 closeBlessingModal();
-            }, 7500);
+            }, 5000);
         }
 
         function closeBlessingModal() {
