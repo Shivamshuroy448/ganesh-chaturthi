@@ -1,21 +1,62 @@
-# 🪔 Vinayaka Chavithi Subhakankshalu 2026 — 3D Virtual Darshan & Puja
+# 🪔 Vinayaka Chavithi Subhakankshalu 2026 — 3D Virtual Darshan, Harathi & Wish Offering
 
-An interactive 3D motion website celebrating Vinayaka Chavithi with Lord Ganesha in a sitting posture, offering sacred Panch-Harathi near legs, grand Laddu prasadam (disappears after 5s), flower showers, and realistic temple bells.
+An authentic, interactive 3D temple mandapam website celebrating **Vinayaka Chavithi** featuring Lord Ganesha on a golden throne, realistic brass lamps, small Harathi near the lotus feet, grand Laddu prasadam, realistic 3D botanical flower shower, devotional song player, and a sacred **"Write Your Wish" (Sri Ganesha Sankalpam)** offering.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Shivamshuroy448/ganesh-chaturthi&project-name=roysvinayakachaviti)
+🌐 **Live Website**: [https://roysvinayakachaviti.vercel.app](https://roysvinayakachaviti.vercel.app)  
+📦 **Repository**: [https://github.com/Shivamshuroy448/ganesh-chaturthi](https://github.com/Shivamshuroy448/ganesh-chaturthi)
 
-## 🌸 Features
-- **3D Lord Ganesha Idol:** Photorealistic 3D murti on golden lotus throne with mouse/touch parallax depth.
-- **Small Harathi Diya Near Legs:** 5-wick transparent brass lamp waving in a circular motion near the lotus feet.
-- **Grand Vinayaka Boondi Laddu:** Traditional offering with cashews and saffron that automatically disappears after 5 seconds.
-- **Telugu in English Script (Tenglish):** Authentic devotional prayers and chants throughout.
-- **Temple Bell Synthesizer:** Real-time brass bell acoustic synthesis via Web Audio API.
+---
+
+## 🌟 Key Features
+
+- **✍️ Write Your Wish (Sri Ganesha Sankalpam / Mee Korika)**:
+  - Sacred Golden Palm Leaf / Suvarna Patram modal to write your heartfelt prayers or choose quick wishes (*Family Health & Joy*, *Career Growth*, *Studies & Exams*, *Peace & Harmony*).
+  - Offering your wish rings temple bells, showers flowers, and places your prayer scroll reverently at **Lord Ganesha's lotus feet** (`#offeredScrollBadge`).
+  - Personalized divine blessing card with a 1-tap **WhatsApp Share** button.
+  - Persists in browser `localStorage` across visits.
+
+- **🌸 Realistic Botanical Flower Shower (Pula Varsham)**:
+  - Procedural botanical petal physics with 4 sacred Indian puja flowers:
+    - **Marigold (Banthi Poovu)**: Ruffled 3-lobed fan shape with saffron-orange to golden-yellow gradients.
+    - **Red Rose (Gulaabi Rekku)**: Velvety cupped heart petals with ruby crimson gradients and translucent curl edges.
+    - **Sacred Lotus (Kamalamu Rekku)**: Pointed lanceolate petals with ivory base to magenta-pink tips.
+    - **Jasmine (Malle Poovu / Chameli)**: 5-petal star blossom with golden stamen.
+  - 3D aerodynamic tumble (`rotX`, `rotY`), sinusoidal air drift, and realistic settling at Lord Ganesha's feet.
+
+- **🪔 Panch-Harathi Diya Near Lotus Feet**:
+  - Small, authentic brass Panch Aarti lamp waving in a circular motion near Lord Ganesha's legs with dynamic warm lighting and real-time slokam chants.
+
+- **🥟 Grand Vinayaka Boondi Laddu Prasadam**:
+  - Traditional festive boondi laddu offering with cashews and saffron that ascends to Lord Ganesha and gracefully disappears after 5 seconds with divine blessings.
+
+- **🔔 High-Fidelity Temple Ganta Sounds**:
+  - Authentic acoustic temple brass bells with multi-tone resonance for left and right bells.
+
+- **🎵 Traditional Devotional Song Player**:
+  - Seamless background YouTube player for traditional Ganesh Aarti (*Lalbaugcha Raja*).
+
+- **📱 100% Zero-Scroll Responsive Design**:
+  - Perfectly fitted single-screen experience across all screen sizes (iPhone, Android, tablet, and desktop) using dynamic `visualViewport` height.
+
+---
 
 ## 🚀 Run Locally
+
 ```bash
+# Clone the repository
+git clone https://github.com/Shivamshuroy448/ganesh-chaturthi.git
+cd ganesh-chaturthi
+
+# Start a local HTTP server
 python3 -m http.server 8080
-# Open http://localhost:8080 in your browser
+
+# Open in browser:
+# http://localhost:8080
 ```
 
-## ☁️ Deploy to roysvinayakachaviti.vercel.app
-Deploy in one click: [Deploy to roysvinayakachaviti.vercel.app](https://vercel.com/new/clone?repository-url=https://github.com/Shivamshuroy448/ganesh-chaturthi&project-name=roysvinayakachaviti)
+---
+
+## ☁️ Deployment
+
+Deployed on **Vercel** with custom production alias:
+- **Production URL**: [https://roysvinayakachaviti.vercel.app](https://roysvinayakachaviti.vercel.app)
