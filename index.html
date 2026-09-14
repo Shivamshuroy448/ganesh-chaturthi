@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Ganesh Chaturthi | Virtual Darshan, Puja & Aarti</title>
+    <meta name="description" content="Experience divine virtual darshan of Lord Ganesha in sitting posture. Perform sacred Aarti with transparent Panch-Aarti diya, offer sweet Modak prasadam, and ring temple bells.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Yatra+One&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                        devanagari: ['Yatra One', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #050302;
+            color: #fef3c7;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* Divine halo rotation */
+        @keyframes rotateHalo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Gentle floating motion for Lord Ganesha */
+        @keyframes gentleLevitate {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-8px) scale(1.006);
+            }
+        }
+
+        /* Transparent Aarti Diya circular waving motion */
+        @keyframes aartiMotion {
+            0% {
+                transform: translate(-50%, 0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.6));
+            }
+            25% {
+                transform: translate(calc(-50% + 55px), -30px) scale(1.05) rotate(6deg);
+                filter: drop-shadow(0 0 35px rgba(251, 191, 36, 1)) drop-shadow(0 0 70px rgba(234, 88, 12, 0.8));
+            }
+            50% {
+                transform: translate(-50%, -55px) scale(1.08) rotate(0deg);
+                filter: drop-shadow(0 0 45px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 85px rgba(220, 38, 38, 0.75));
+            }
+            75% {
+                transform: translate(calc(-50% - 55px), -30px) scale(1.05) rotate(-6deg);
+                filter: drop-shadow(0 0 35px rgba(251, 191, 36, 1)) drop-shadow(0 0 70px rgba(234, 88, 12, 0.8));
+            }
+            100% {
+                transform: translate(-50%, 0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.6));
+            }
+        }
+
+        /* Diya flame flicker */
+        @keyframes flameFlicker {
+            0%, 100% {
+                transform: scale(1) rotate(-1deg);
+                filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 35px rgba(220, 38, 38, 0.7));
+            }
+            25% {
+                transform: scale(1.08, 0.94) rotate(1.5deg);
+                filter: drop-shadow(0 0 22px rgba(251, 191, 36, 1)) drop-shadow(0 0 45px rgba(234, 88, 12, 0.85));
+            }
+            50% {
+                transform: scale(0.96, 1.05) rotate(-2deg);
+                filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.9)) drop-shadow(0 0 30px rgba(220, 38, 38, 0.65));
+            }
+            75% {
+                transform: scale(1.04, 0.98) rotate(1deg);
+                filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.98)) drop-shadow(0 0 40px rgba(234, 88, 12, 0.8));
+            }
+        }
+
+        /* Temple Bell swing animation */
+        @keyframes bellSwingLeft {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(18deg); }
+            40% { transform: rotate(-14deg); }
+            60% { transform: rotate(8deg); }
+            80% { transform: rotate(-4deg); }
+        }
+
+        @keyframes bellSwingRight {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(-18deg); }
+            40% { transform: rotate(14deg); }
+            60% { transform: rotate(-8deg); }
+            80% { transform: rotate(4deg); }
+        }
+
+        /* Divine blessing pulse beam */
+        @keyframes blessingPulse {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.95;
+                transform: scale(1.2);
+            }
+        }
+
+        .animate-levitate {
+            animation: gentleLevitate 5.5s ease-in-out infinite;
+        }
+
+        .animate-halo {
+            animation: rotateHalo 45s linear infinite;
+        }
+
+        .animate-aarti {
+            animation: aartiMotion 3.2s ease-in-out infinite;
+        }
+
+        .animate-flame {
+            animation: flameFlicker 0.9s ease-in-out infinite alternate;
+        }
+
+        .swing-left {
+            animation: bellSwingLeft 1.4s ease-out;
+            transform-origin: top center;
+        }
+
+        .swing-right {
+            animation: bellSwingRight 1.4s ease-out;
+            transform-origin: top center;
+        }
+
+        .glass-gold {
+            background: rgba(20, 13, 5, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.28);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.85), 0 0 35px -5px rgba(245, 158, 11, 0.18);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-amber-500 selection:text-black font-sans">
+
+    <!-- Canvas for 60fps Golden Sparkles & Flower Shower -->
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-20"></canvas>
+
+    <!-- Divine Temple Sanctum Background Gradients -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(217,119,6,0.28)_0%,rgba(120,53,15,0.22)_40%,rgba(5,3,2,0.95)_78%,#050302_100%)]"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-72 bg-gradient-to-t from-black via-amber-950/20 to-transparent"></div>
+        <div class="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    </div>
+
+    <!-- TOP NAVIGATION & FESTIVAL TITLE -->
+    <header class="relative z-30 w-full px-4 sm:px-8 pt-4 pb-2">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <!-- Left: Title -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-red-600 flex items-center justify-center text-lg shadow-lg shadow-amber-500/20 border border-amber-400/40">
+                    🕉️
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-devanagari text-amber-400 font-bold tracking-wider">॥ श्री गणेशाय नमः ॥</span>
+                        <span class="px-2 py-0.5 rounded-full bg-red-950/80 border border-red-500/40 text-[10px] text-red-300 font-semibold uppercase tracking-wider animate-pulse">
+                            Ganesh Chaturthi
+                        </span>
+                    </div>
+                    <h1 class="text-lg sm:text-2xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-100">
+                        Virtual Darshan &amp; Puja
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Right Controls: Audio & Fullscreen/Share -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Temple Bell Sound Toggle -->
+                <button id="soundToggleBtn" onclick="toggleTempleMusic()" class="px-3 py-2 rounded-xl bg-amber-950/50 hover:bg-amber-900/70 border border-amber-500/30 text-amber-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium group" title="Toggle Temple Ambient Sounds">
+                    <svg id="soundIconOn" class="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                    <svg id="soundIconOff" class="w-4 h-4 text-slate-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
+                    <span class="font-mono text-[11px]" id="soundText">Ambient Sound</span>
+                </button>
+
+                <!-- Share Wishes -->
+                <button onclick="shareDarshan()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-lg shadow-amber-600/30">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    <span>Share</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN TEMPLE SANCTUM (MOTION & VISUAL CENTERPIECE) -->
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-2 sm:py-4">
+
+        <!-- Hanging Temple Bells on Left & Right -->
+        <div class="w-full max-w-4xl relative flex justify-between items-start pointer-events-none mb-[-30px] sm:mb-[-50px] z-30 px-6 sm:px-12">
+            <!-- Left Bell -->
+            <div id="leftBell" onclick="ringLeftBell()" class="pointer-events-auto cursor-pointer group flex flex-col items-center select-none" title="Click to ring bell">
+                <div class="w-1.5 h-16 sm:h-24 bg-gradient-to-b from-amber-800 via-amber-600 to-yellow-500 rounded-sm"></div>
+                <div class="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-700 rounded-b-2xl rounded-t-lg border-2 border-amber-300 shadow-lg shadow-amber-500/50 flex flex-col items-center justify-end pb-1 group-hover:scale-105 transition-transform">
+                    <div class="w-2.5 h-2.5 bg-yellow-200 rounded-full shadow-inner"></div>
+                </div>
+                <span class="text-[9px] font-mono text-amber-400/80 mt-1 opacity-70 group-hover:opacity-100 transition-opacity">🔔 Ring</span>
+            </div>
+
+            <!-- Sacred Mantra Banner (Center Top) -->
+            <div class="pointer-events-auto text-center px-4 py-2 rounded-full glass-gold max-w-md mx-auto transform -translate-y-1">
+                <p id="mantraText" class="font-devanagari text-xs sm:text-sm text-amber-300 font-bold tracking-wide transition-all duration-500">
+                    वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+                </p>
+                <p id="mantraMeaning" class="text-[10px] text-amber-400/80 font-sans mt-0.5">
+                    "O Lord of curved trunk & radiant light, remove all obstacles from our journey forever."
+                </p>
+            </div>
+
+            <!-- Right Bell -->
+            <div id="rightBell" onclick="ringRightBell()" class="pointer-events-auto cursor-pointer group flex flex-col items-center select-none" title="Click to ring bell">
+                <div class="w-1.5 h-16 sm:h-24 bg-gradient-to-b from-amber-800 via-amber-600 to-yellow-500 rounded-sm"></div>
+                <div class="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-amber-500 via-yellow-400 to-amber-700 rounded-b-2xl rounded-t-lg border-2 border-amber-300 shadow-lg shadow-amber-500/50 flex flex-col items-center justify-end pb-1 group-hover:scale-105 transition-transform">
+                    <div class="w-2.5 h-2.5 bg-yellow-200 rounded-full shadow-inner"></div>
+                </div>
+                <span class="text-[9px] font-mono text-amber-400/80 mt-1 opacity-70 group-hover:opacity-100 transition-opacity">🔔 Ring</span>
+            </div>
+        </div>
+
+        <!-- SHRINE CONTAINER -->
+        <div class="relative w-full max-w-2xl flex flex-col items-center justify-center my-auto">
+
+            <!-- Golden Aura & Rays Behind Lord Ganesha -->
+            <div class="absolute w-[360px] h-[360px] sm:w-[500px] sm:h-[500px] rounded-full pointer-events-none z-0">
+                <div class="absolute inset-0 rounded-full animate-halo opacity-30 bg-[radial-gradient(circle,rgba(251,191,36,0.35)_0%,rgba(217,119,6,0.15)_50%,transparent_70%)]">
+                    <svg viewBox="0 0 200 200" class="w-full h-full text-amber-500/20 fill-current">
+                        <polygon points="100,0 104,80 120,40 110,88 150,55 120,96 175,80 126,108 190,115 125,122 180,150 118,132 155,180 108,138 120,195 100,140 80,195 92,138 45,180 82,132 20,150 75,122 10,115 74,108 25,80 80,96 50,55 90,88 80,40 96,80" />
+                    </svg>
+                </div>
+                <div id="divineAuraGlow" class="absolute inset-4 rounded-full bg-gradient-to-r from-amber-500/25 via-yellow-400/35 to-amber-600/25 blur-2xl animate-pulse"></div>
+            </div>
+
+            <!-- LORD GANESHA SEATED IMAGE -->
+            <div class="relative z-10 animate-levitate transition-transform duration-700">
+                <!-- Arch Frame with Gold Border & Sacred Accents -->
+                <div class="relative p-2.5 sm:p-4 rounded-t-[140px] sm:rounded-t-[200px] rounded-b-3xl bg-gradient-to-b from-amber-500/40 via-yellow-600/30 to-amber-950/60 shadow-2xl shadow-amber-500/30 border-2 border-amber-400/60 backdrop-blur-md">
+                    
+                    <!-- Inner Arch Image -->
+                    <div class="relative overflow-hidden rounded-t-[130px] sm:rounded-t-[190px] rounded-b-2xl w-[290px] h-[340px] sm:w-[410px] sm:h-[480px] bg-amber-950/80">
+                        <img id="ganeshaImg" src="assets/ganesha.jpg" alt="Lord Ganesha in Sitting Position" class="w-full h-full object-cover object-center transform scale-[1.02] transition-transform duration-1000">
+
+                        <!-- Blessing Mudra Glow (Right hand) -->
+                        <div id="blessingGlow" class="absolute top-[38%] left-[28%] w-16 h-16 rounded-full bg-yellow-300/40 blur-lg pointer-events-none opacity-60 animate-[blessingPulse_2.5s_infinite]"></div>
+
+                        <!-- Modak Glow (Left hand) -->
+                        <div class="absolute top-[48%] right-[22%] w-12 h-12 rounded-full bg-amber-400/35 blur-md pointer-events-none animate-pulse"></div>
+
+                        <!-- Subtle divine light sweep overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-amber-400/10 pointer-events-none"></div>
+                    </div>
+
+                    <!-- Glowing lotus throne base trim -->
+                    <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-5 py-1 rounded-full bg-gradient-to-r from-red-800 via-amber-600 to-red-800 border border-amber-400/70 shadow-lg text-amber-200 text-[11px] sm:text-xs font-devanagari font-bold whitespace-nowrap">
+                        🌸 सिद्धि विनायक 🌸
+                    </div>
+                </div>
+
+                <!-- Left Diya Stand -->
+                <div class="absolute -left-6 sm:-left-12 bottom-4 sm:bottom-8 flex flex-col items-center">
+                    <div class="w-5 h-8 sm:w-6 sm:h-10 bg-gradient-to-t from-orange-600 via-amber-400 to-yellow-100 rounded-full rounded-b-lg animate-flame origin-bottom"></div>
+                    <div class="w-8 h-4 sm:w-10 sm:h-5 bg-gradient-to-r from-amber-600 via-yellow-400 to-amber-700 rounded-b-full border border-amber-300 shadow-md"></div>
+                    <div class="w-2 h-10 sm:h-14 bg-amber-700 rounded-sm"></div>
+                    <div class="w-9 h-2.5 bg-amber-800 rounded-full border border-amber-500/40"></div>
+                </div>
+
+                <!-- Right Diya Stand -->
+                <div class="absolute -right-6 sm:-right-12 bottom-4 sm:bottom-8 flex flex-col items-center">
+                    <div class="w-5 h-8 sm:w-6 sm:h-10 bg-gradient-to-t from-orange-600 via-amber-400 to-yellow-100 rounded-full rounded-b-lg animate-flame origin-bottom"></div>
+                    <div class="w-8 h-4 sm:w-10 sm:h-5 bg-gradient-to-r from-amber-600 via-yellow-400 to-amber-700 rounded-b-full border border-amber-300 shadow-md"></div>
+                    <div class="w-2 h-10 sm:h-14 bg-amber-700 rounded-sm"></div>
+                    <div class="w-9 h-2.5 bg-amber-800 rounded-full border border-amber-500/40"></div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- TRANSPARENT AARTI DIYA (100% ISOLATED & FLOATING) -->
+            <!-- ========================================== -->
+            <div id="aartiContainer" class="absolute bottom-2 sm:bottom-8 left-1/2 -translate-x-1/2 z-40 hidden pointer-events-none">
+                <div id="aartiThali" class="relative pointer-events-none select-none">
+                    <!-- Pure Transparent Panch Aarti Diya Image -->
+                    <img src="assets/aarti_transparent.png" alt="Panch Aarti Diya Lamp with Handle" class="w-64 sm:w-80 h-auto pointer-events-none drop-shadow-[0_0_35px_rgba(245,158,11,0.95)] drop-shadow-[0_0_70px_rgba(220,38,38,0.7)]">
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- TRANSPARENT PRASADAM THALI (100% ISOLATED) -->
+            <!-- ========================================== -->
+            <div id="prasadamContainer" class="absolute bottom-1 sm:bottom-4 left-1/2 -translate-x-1/2 z-35 transition-all duration-1000 transform translate-y-32 opacity-0 pointer-events-none">
+                <div class="relative pointer-events-none select-none">
+                    <img src="assets/prasadam_transparent.png" alt="Prasadam Offering: Modaks and Laddoos" class="w-56 sm:w-72 h-auto drop-shadow-[0_0_45px_rgba(245,158,11,0.85)]">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BLESSINGS BANNER MODAL (APPEARS AFTER PRASADAM / PUJA) -->
+        <div id="blessingModal" class="fixed top-24 z-50 transition-all duration-700 transform -translate-y-20 opacity-0 pointer-events-none max-w-lg mx-4">
+            <div class="glass-gold p-4 sm:p-6 rounded-2xl text-center border-2 border-amber-400/70 shadow-2xl relative">
+                <button onclick="closeBlessingModal()" class="absolute top-2 right-2.5 text-amber-300/70 hover:text-white text-base">✕</button>
+                <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-400/40 text-2xl flex items-center justify-center mx-auto mb-2">
+                    🙏
+                </div>
+                <h3 id="blessingTitle" class="text-base sm:text-lg font-cinzel font-bold text-amber-300">
+                    Bhog Accepted! Modak Prasadam Blessed 🥟
+                </h3>
+                <p id="blessingDesc" class="text-xs sm:text-sm text-slate-200 mt-1.5 leading-relaxed font-sans">
+                    Lord Ganesha happily accepts your sweet modak offering! May your home be blessed with immense prosperity, peace, intellect, and happiness.
+                </p>
+                <div class="mt-3 flex items-center justify-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-devanagari text-xs font-bold">
+                        गणपति बप्पा मोरया!
+                    </span>
+                    <span class="px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 font-devanagari text-xs font-bold">
+                        मंगल मूर्ति मोरया!
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- BOTTOM ACTION BAR: PUJA, ARTI, PRASADAM, FLOWERS -->
+    <footer class="relative z-30 w-full px-4 sm:px-8 pb-6 pt-3">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Devotional Chant Subtitle (Real-time Aarti lyrics) -->
+            <div id="aartiLyricsBox" class="text-center mb-3 hidden">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-950/80 border border-red-500/40 shadow-lg text-amber-200 font-devanagari text-xs sm:text-sm animate-pulse">
+                    <span>🪔</span>
+                    <span id="aartiLyricText">जय गणेश जय गणेश जय गणेश देवा...</span>
+                    <span>🪔</span>
+                </div>
+            </div>
+
+            <!-- Action Controls Grid -->
+            <div class="glass-gold p-3 sm:p-4 rounded-3xl grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
+                
+                <!-- 1. Perform Aarti Button -->
+                <button id="aartiBtn" onclick="toggleAarti()" class="relative group overflow-hidden px-4 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 hover:from-amber-500 hover:to-red-500 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 shadow-lg shadow-orange-600/30 active:scale-95 transition-all">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base sm:text-lg group-hover:scale-125 transition-transform">🪔</span>
+                        <span id="aartiBtnLabel">Perform Aarti</span>
+                    </div>
+                    <span class="text-[10px] text-amber-200/90 font-devanagari font-normal">आरती करें</span>
+                    <span id="aartiBtnGlow" class="absolute inset-0 border-2 border-yellow-300 rounded-2xl opacity-0 transition-opacity"></span>
+                </button>
+
+                <!-- 2. Offer Prasadam Button -->
+                <button id="prasadamBtn" onclick="offerPrasadam()" class="relative group overflow-hidden px-4 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-br from-yellow-600 via-amber-600 to-emerald-700 hover:from-yellow-500 hover:to-emerald-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 shadow-lg shadow-amber-600/30 active:scale-95 transition-all">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base sm:text-lg group-hover:scale-125 transition-transform">🥟</span>
+                        <span>Offer Prasadam</span>
+                    </div>
+                    <span class="text-[10px] text-amber-200/90 font-devanagari font-normal">मोदक प्रसाद अर्पण</span>
+                </button>
+
+                <!-- 3. Shower Flowers Button -->
+                <button onclick="showerFlowers(50)" class="relative group overflow-hidden px-4 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-br from-rose-600 via-red-600 to-amber-700 hover:from-rose-500 hover:to-amber-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 shadow-lg shadow-rose-600/30 active:scale-95 transition-all">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base sm:text-lg group-hover:scale-125 transition-transform">🌸</span>
+                        <span>Shower Flowers</span>
+                    </div>
+                    <span class="text-[10px] text-rose-200/90 font-devanagari font-normal">पुष्प वर्षा</span>
+                </button>
+
+                <!-- 4. Ring Temple Bell Button -->
+                <button onclick="ringBothBells()" class="relative group overflow-hidden px-4 py-3 sm:py-3.5 rounded-2xl bg-gradient-to-br from-amber-700 via-yellow-700 to-amber-900 hover:from-amber-600 hover:to-yellow-600 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 shadow-lg shadow-yellow-700/30 active:scale-95 transition-all">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base sm:text-lg group-hover:scale-125 transition-transform">🔔</span>
+                        <span>Ring Bell</span>
+                    </div>
+                    <span class="text-[10px] text-yellow-200/90 font-devanagari font-normal">घंटी वादन</span>
+                </button>
+
+            </div>
+
+            <!-- Footer Devotional Wishes -->
+            <div class="mt-3.5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-amber-400/70 font-mono gap-1">
+                <div>
+                    Wishing you a blessed &amp; prosperous <strong class="text-amber-300">Ganesh Chaturthi</strong>!
+                </div>
+                <div class="flex items-center gap-3 text-slate-400">
+                    <span>🕉️ ॐ गं गणपतये नमः</span>
+                    <span>•</span>
+                    <span>गणपति बप्पा मोरया!</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // ==========================================
+        // 1. WEB AUDIO API SYNTHESIZER
+        // ==========================================
+        let audioCtx = null;
+        let tanpuraOsc1 = null;
+        let tanpuraOsc2 = null;
+        let tanpuraGain = null;
+        let isMusicPlaying = false;
+        let isAartiActive = false;
+        let aartiTimer = null;
+        let aartiLyricIndex = 0;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        // Realistic Brass Temple Bell Sound Generator
+        function playBellChime(freq = 587.33, duration = 3.2) {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+
+                const harmonics = [
+                    { ratio: 1.0, gain: 0.75 },
+                    { ratio: 2.02, gain: 0.45 },
+                    { ratio: 3.01, gain: 0.28 },
+                    { ratio: 4.25, gain: 0.18 },
+                    { ratio: 5.4, gain: 0.1 }
+                ];
+
+                const masterGain = ctx.createGain();
+                masterGain.gain.setValueAtTime(0.6, now);
+                masterGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+                masterGain.connect(ctx.destination);
+
+                harmonics.forEach(h => {
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq * h.ratio, now);
+
+                    oscGain.gain.setValueAtTime(h.gain, now);
+                    oscGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * (1 / Math.sqrt(h.ratio)));
+
+                    osc.connect(oscGain);
+                    oscGain.connect(masterGain);
+
+                    osc.start(now);
+                    osc.stop(now + duration);
+                });
+            } catch (e) {
+                console.warn('Audio context unavailable:', e);
+            }
+        }
+
+        // Meditative Tanpura / Sacred Sa-Pa Drone
+        function toggleTempleMusic() {
+            const ctx = getAudioContext();
+            const soundOn = document.getElementById('soundIconOn');
+            const soundOff = document.getElementById('soundIconOff');
+            const soundText = document.getElementById('soundText');
+
+            if (!isMusicPlaying) {
+                const now = ctx.currentTime;
+                tanpuraGain = ctx.createGain();
+                tanpuraGain.gain.setValueAtTime(0.001, now);
+                tanpuraGain.gain.exponentialRampToValueAtTime(0.12, now + 2.0);
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(450, now);
+
+                tanpuraOsc1 = ctx.createOscillator();
+                tanpuraOsc1.type = 'triangle';
+                tanpuraOsc1.frequency.setValueAtTime(138.59, now); // Sa
+
+                tanpuraOsc2 = ctx.createOscillator();
+                tanpuraOsc2.type = 'sine';
+                tanpuraOsc2.frequency.setValueAtTime(207.65, now); // Pa
+
+                tanpuraOsc1.connect(filter);
+                tanpuraOsc2.connect(filter);
+                filter.connect(tanpuraGain);
+                tanpuraGain.connect(ctx.destination);
+
+                tanpuraOsc1.start(now);
+                tanpuraOsc2.start(now);
+
+                isMusicPlaying = true;
+                soundOn.classList.remove('hidden');
+                soundOff.classList.add('hidden');
+                soundText.textContent = 'Drone On';
+                playBellChime(659.25, 2.5);
+            } else {
+                const now = ctx.currentTime;
+                if (tanpuraGain) {
+                    tanpuraGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.0);
+                    setTimeout(() => {
+                        try {
+                            tanpuraOsc1.stop();
+                            tanpuraOsc2.stop();
+                        } catch(e) {}
+                    }, 1000);
+                }
+                isMusicPlaying = false;
+                soundOn.classList.add('hidden');
+                soundOff.classList.remove('hidden');
+                soundText.textContent = 'Muted';
+            }
+        }
+
+        // ==========================================
+        // 2. BELL RINGING PHYSICS & SOUND
+        // ==========================================
+        function ringLeftBell() {
+            const bell = document.getElementById('leftBell');
+            bell.classList.remove('swing-left');
+            void bell.offsetWidth;
+            bell.classList.add('swing-left');
+            playBellChime(587.33, 3.2);
+        }
+
+        function ringRightBell() {
+            const bell = document.getElementById('rightBell');
+            bell.classList.remove('swing-right');
+            void bell.offsetWidth;
+            bell.classList.add('swing-right');
+            playBellChime(659.25, 3.5);
+        }
+
+        function ringBothBells() {
+            ringLeftBell();
+            setTimeout(ringRightBell, 180);
+            showerFlowers(20);
+        }
+
+        // ==========================================
+        // 3. TRANSPARENT AARTI MOTION & RITUAL
+        // ==========================================
+        const aartiLyrics = [
+            "जय गणेश जय गणेश जय गणेश देवा...",
+            "माता जाकी पार्वती पिता महादेवा...",
+            "एक दंत दयावंत चार भुजाधारी...",
+            "माथे सिंदूर सोहे मूसे की सवारी...",
+            "पान चढ़े फूल चढ़े और चढ़े मेवा...",
+            "लड्डुअन का भोग लगे संत करें सेवा...",
+            "दीनन की लाज राखो शंभु सुत वारी...",
+            "कामना को पूर्ण करो जाऊं बलिहारी...",
+            "गणपति बप्पा मोरया! मंगल मूर्ति मोरया!"
+        ];
+
+        function toggleAarti() {
+            isAartiActive = !isAartiActive;
+            const container = document.getElementById('aartiContainer');
+            const thali = document.getElementById('aartiThali');
+            const btnLabel = document.getElementById('aartiBtnLabel');
+            const btnGlow = document.getElementById('aartiBtnGlow');
+            const lyricsBox = document.getElementById('aartiLyricsBox');
+            const lyricText = document.getElementById('aartiLyricText');
+            const auraGlow = document.getElementById('divineAuraGlow');
+
+            if (isAartiActive) {
+                container.classList.remove('hidden');
+                thali.classList.add('animate-aarti');
+                btnLabel.textContent = 'Pause Aarti';
+                btnGlow.classList.remove('opacity-0');
+                lyricsBox.classList.remove('hidden');
+                auraGlow.classList.add('scale-125', 'bg-amber-400/50');
+
+                let bellPitch = true;
+                aartiTimer = setInterval(() => {
+                    playBellChime(bellPitch ? 587.33 : 659.25, 2.0);
+                    bellPitch = !bellPitch;
+
+                    aartiLyricIndex = (aartiLyricIndex + 1) % aartiLyrics.length;
+                    lyricText.textContent = aartiLyrics[aartiLyricIndex];
+
+                    showerFlowers(8);
+                }, 1600);
+
+                playBellChime(523.25, 4.0);
+                showerFlowers(30);
+
+            } else {
+                clearInterval(aartiTimer);
+                thali.classList.remove('animate-aarti');
+                container.classList.add('hidden');
+                btnLabel.textContent = 'Perform Aarti';
+                btnGlow.classList.add('opacity-0');
+                lyricsBox.classList.add('hidden');
+                auraGlow.classList.remove('scale-125', 'bg-amber-400/50');
+            }
+        }
+
+        // ==========================================
+        // 4. TRANSPARENT PRASADAM OFFERING
+        // ==========================================
+        function offerPrasadam() {
+            const container = document.getElementById('prasadamContainer');
+            const modal = document.getElementById('blessingModal');
+            const blessingGlow = document.getElementById('blessingGlow');
+
+            container.classList.remove('translate-y-32', 'opacity-0');
+            container.classList.add('translate-y-0', 'opacity-100');
+
+            blessingGlow.classList.remove('opacity-60');
+            blessingGlow.classList.add('opacity-100', 'scale-150');
+
+            playBellChime(523.25, 2.0);
+            setTimeout(() => playBellChime(659.25, 2.5), 250);
+            setTimeout(() => playBellChime(783.99, 3.5), 500);
+
+            showerFlowers(60);
+
+            setTimeout(() => {
+                modal.classList.remove('-translate-y-20', 'opacity-0', 'pointer-events-none');
+                modal.classList.add('translate-y-0', 'opacity-100');
+            }, 900);
+
+            setTimeout(() => {
+                closeBlessingModal();
+            }, 7500);
+        }
+
+        function closeBlessingModal() {
+            const modal = document.getElementById('blessingModal');
+            modal.classList.add('-translate-y-20', 'opacity-0', 'pointer-events-none');
+            modal.classList.remove('translate-y-0', 'opacity-100');
+        }
+
+        // ==========================================
+        // 5. PARTICLE ENGINE: SPARKLES & FLOWER PETALS
+        // ==========================================
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const flowerColors = [
+            '#f59e0b',
+            '#fbbf24',
+            '#ef4444',
+            '#dc2626',
+            '#f97316'
+        ];
+
+        for (let i = 0; i < 45; i++) {
+            particles.push({
+                type: 'sparkle',
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 2.5 + 0.8,
+                speedY: -(Math.random() * 0.6 + 0.2),
+                speedX: (Math.random() - 0.5) * 0.4,
+                alpha: Math.random() * 0.7 + 0.2
+            });
+        }
+
+        function showerFlowers(count = 35) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    type: 'petal',
+                    x: Math.random() * width,
+                    y: -30 - Math.random() * 100,
+                    size: Math.random() * 10 + 8,
+                    color: flowerColors[Math.floor(Math.random() * flowerColors.length)],
+                    speedY: Math.random() * 2.8 + 2.0,
+                    speedX: (Math.random() - 0.5) * 2.2,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.08
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+
+                if (p.type === 'sparkle') {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.alpha += Math.sin(Date.now() * 0.003 + i) * 0.01;
+
+                    if (p.y < 0) {
+                        p.y = height + 10;
+                        p.x = Math.random() * width;
+                    }
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(251, 191, 36, ${Math.max(0.1, Math.min(0.9, p.alpha))})`;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#f59e0b';
+                    ctx.fill();
+                    ctx.restore();
+
+                } else if (p.type === 'petal') {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rotation += p.rotSpeed;
+
+                    if (p.y > height + 20) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation);
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = p.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        setTimeout(() => {
+            showerFlowers(30);
+        }, 800);
+
+        // ==========================================
+        // 6. SHARE BLESSINGS / WEB SHARE API
+        // ==========================================
+        function shareDarshan() {
+            const shareData = {
+                title: 'Happy Ganesh Chaturthi 2026 | Virtual Darshan & Aarti',
+                text: 'May Lord Ganesha remove all obstacles and shower your life with wisdom & prosperity! Ganpati Bappa Morya! 🙏',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('✨ Darshan link copied to clipboard! Share the blessings with family & friends.');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
