@@ -165,12 +165,16 @@
                 </div>
             </div>
 
-            <!-- Right Controls: Audio & Share -->
+            <!-- Right Controls: Play Devotional Song & Share -->
             <div class="flex items-center gap-1.5 sm:gap-2">
-                <button id="soundToggleBtn" onclick="toggleTempleMusic()" class="px-2.5 py-1.5 rounded-xl bg-amber-950/50 hover:bg-amber-900/70 border border-amber-500/30 text-amber-300 hover:text-white transition-all flex items-center gap-1.5 text-[11px] font-medium group" title="Temple Sound Toggle">
-                    <svg id="soundIconOn" class="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
-                    <svg id="soundIconOff" class="w-3.5 h-3.5 text-slate-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
-                    <span class="font-mono text-[10px]" id="soundText">Devotional Tone</span>
+                <button id="songToggleBtn" onclick="toggleSong()" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-950/80 via-amber-900/80 to-red-950/80 hover:from-amber-900 hover:to-red-900 border border-amber-500/40 text-amber-200 hover:text-white transition-all flex items-center gap-1.5 text-[11px] font-medium group active:scale-95 shadow-md shadow-amber-950/30" title="Play Traditional Ganesh Aarti (Lalbaugcha Raja)">
+                    <span id="songIcon" class="text-xs group-hover:scale-110 transition-transform">🎵</span>
+                    <span class="font-sans font-semibold text-[10px] sm:text-[11px]" id="songBtnText">Play Song</span>
+                    <span id="songEqualizer" class="hidden items-end gap-0.5 h-2.5 ml-0.5">
+                        <span class="w-0.5 h-full bg-amber-400 rounded-full animate-pulse"></span>
+                        <span class="w-0.5 h-2/3 bg-amber-300 rounded-full animate-bounce"></span>
+                        <span class="w-0.5 h-full bg-amber-400 rounded-full animate-pulse"></span>
+                    </span>
                 </button>
 
                 <button onclick="shareDarshan()" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-slate-950 font-bold text-[11px] flex items-center gap-1.5 transition-all shadow-md shadow-amber-600/30">
@@ -365,17 +369,85 @@
     <!-- INTERACTIVE JAVASCRIPT: WEB AUDIO SYNTHESIZER, MOTION ENGINE -->
     <script>
         // ==========================================
-        // 1. WEB AUDIO API TEMPLE SYNTHESIZER
+        // 1. TRADITIONAL GANESH AARTI SONG (YOUTUBE API)
         // ==========================================
-        let audioCtx = null;
-        let tanpuraOsc1 = null;
-        let tanpuraOsc2 = null;
-        let tanpuraGain = null;
-        let isMusicPlaying = false;
+        let ytPlayer = null;
+        let isSongPlaying = false;
+        let ytApiLoaded = false;
         let isAartiActive = false;
         let aartiTimer = null;
         let aartiLyricIndex = 0;
 
+        // Load YouTube IFrame API asynchronously
+        (function() {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(tag, firstScript);
+        })();
+
+        window.onYouTubeIframeAPIReady = function() {
+            ytPlayer = new YT.Player('youtubePlayer', {
+                height: '180',
+                width: '180',
+                videoId: '0iTb6b8F5to',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'playsinline': 1,
+                    'loop': 1,
+                    'playlist': '0iTb6b8F5to',
+                    'rel': 0,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': () => { ytApiLoaded = true; },
+                    'onStateChange': onYtStateChange
+                }
+            });
+        };
+
+        function onYtStateChange(event) {
+            const btnText = document.getElementById('songBtnText');
+            const icon = document.getElementById('songIcon');
+            const eq = document.getElementById('songEqualizer');
+
+            if (event.data === YT.PlayerState.PLAYING) {
+                isSongPlaying = true;
+                btnText.textContent = 'Pause Song';
+                icon.textContent = '⏸';
+                eq.classList.remove('hidden');
+                eq.classList.add('flex');
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                isSongPlaying = false;
+                btnText.textContent = 'Play Song';
+                icon.textContent = '🎵';
+                eq.classList.remove('flex');
+                eq.classList.add('hidden');
+            }
+        }
+
+        function toggleSong() {
+            const btnText = document.getElementById('songBtnText');
+            const icon = document.getElementById('songIcon');
+            const eq = document.getElementById('songEqualizer');
+
+            if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') {
+                window.open('https://www.youtube.com/watch?v=0iTb6b8F5to', '_blank');
+                return;
+            }
+
+            if (isSongPlaying) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        }
+
+        // ==========================================
+        // 2. REALISTIC INDIAN TEMPLE GANTA AUDIO ENGINE
+        // ==========================================
+        let audioCtx = null;
         function getAudioContext() {
             if (!audioCtx) {
                 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -387,49 +459,39 @@
             return audioCtx;
         }
 
-        // ==========================================
-        // REALISTIC INDIAN TEMPLE GANTA AUDIO ENGINE
-        // ==========================================
-        let heavyBellBuffer = null;
-        let brightBellBuffer = null;
-        let isBellsLoading = false;
-
-        async function preloadTempleBells() {
-            if (heavyBellBuffer && brightBellBuffer) return;
-            if (isBellsLoading) return;
-            isBellsLoading = true;
-
+        // Master Temple Bell (Ganta) Function - 100% Reliable HTML5 Click Playback
+        function playTempleGanta(type = 'left', volume = 1.0) {
             try {
-                const ctx = getAudioContext();
-                const [heavyRes, brightRes] = await Promise.all([
-                    fetch('assets/temple_bell_heavy.wav'),
-                    fetch('assets/temple_bell_bright.wav')
-                ]);
+                const isLeft = (type === 'left' || type === 'heavy');
+                const audioId = isLeft ? 'bellAudioHeavy' : 'bellAudioBright';
+                const el = document.getElementById(audioId);
 
-                if (heavyRes.ok && brightRes.ok) {
-                    const [heavyData, brightData] = await Promise.all([
-                        heavyRes.arrayBuffer(),
-                        brightRes.arrayBuffer()
-                    ]);
-                    heavyBellBuffer = await ctx.decodeAudioData(heavyData);
-                    brightBellBuffer = await ctx.decodeAudioData(brightData);
+                if (el) {
+                    // Clone node to allow rapid-fire multi-bell ringing on every tap
+                    const soundClone = el.cloneNode(true);
+                    soundClone.volume = Math.max(0.1, Math.min(1.0, volume));
+                    const playPromise = soundClone.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {
+                            playProceduralTempleBell(isLeft ? 466.16 : 587.33, 4.2, volume);
+                        });
+                    }
+                    return;
                 }
-            } catch (err) {
-                console.warn('Using procedural temple bell synthesis:', err);
-            } finally {
-                isBellsLoading = false;
+
+                playProceduralTempleBell(isLeft ? 466.16 : 587.33, 4.2, volume);
+            } catch (e) {
+                console.warn('Temple ganta play error:', e);
             }
         }
 
-        // Preload on first user interaction or DOM ready
-        window.addEventListener('DOMContentLoaded', preloadTempleBells);
-        window.addEventListener('pointerdown', () => {
-            getAudioContext();
-            preloadTempleBells();
-        }, { once: true });
+        // Backward-compatible alias
+        function playBellChime(freq = 587.33, duration = 3.5) {
+            playTempleGanta(freq < 550 ? 'left' : 'right', 0.95);
+        }
 
-        // Physical modeling synthesis of Indian cast bronze temple bell (fallback & procedural)
-        function playProceduralTempleBell(f0 = 520, duration = 4.8, volume = 0.9) {
+        // High-Fidelity Inharmonic Fallback Synthesis
+        function playProceduralTempleBell(f0 = 520, duration = 4.5, volume = 0.9) {
             try {
                 const ctx = getAudioContext();
                 const now = ctx.currentTime;
@@ -439,16 +501,12 @@
                 masterGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
                 masterGain.connect(ctx.destination);
 
-                // Authentic non-integer inharmonic modes of heavy temple bells (Hum, Prime, Tierce minor-third, Quint, Nominal, Decime)
                 const modes = [
-                    { ratio: 0.50,  gain: 0.50, decay: 5.2, detune: 0.7 },
-                    { ratio: 1.00,  gain: 0.85, decay: 4.4, detune: 1.5 },
-                    { ratio: 1.186, gain: 0.65, decay: 3.9, detune: 1.8 },
-                    { ratio: 1.515, gain: 0.42, decay: 3.2, detune: 2.1 },
-                    { ratio: 2.00,  gain: 0.48, decay: 2.8, detune: 2.6 },
-                    { ratio: 2.55,  gain: 0.28, decay: 2.1, detune: 3.2 },
-                    { ratio: 3.14,  gain: 0.18, decay: 1.5, detune: 3.9 },
-                    { ratio: 4.18,  gain: 0.12, decay: 1.0, detune: 4.6 }
+                    { ratio: 0.50,  gain: 0.50, decay: 4.8, detune: 0.7 },
+                    { ratio: 1.00,  gain: 0.85, decay: 4.2, detune: 1.5 },
+                    { ratio: 1.186, gain: 0.65, decay: 3.8, detune: 1.8 },
+                    { ratio: 1.515, gain: 0.42, decay: 3.0, detune: 2.1 },
+                    { ratio: 2.00,  gain: 0.48, decay: 2.6, detune: 2.6 }
                 ];
 
                 modes.forEach(m => {
@@ -459,7 +517,6 @@
                     const freq = f0 * m.ratio;
                     osc1.type = 'sine';
                     osc1.frequency.setValueAtTime(freq, now);
-
                     osc2.type = 'sine';
                     osc2.frequency.setValueAtTime(freq + m.detune, now);
 
@@ -476,112 +533,7 @@
                     osc1.stop(now + modeDecay);
                     osc2.stop(now + modeDecay);
                 });
-
-                // Clapper strike transient (short metallic clink in first 25ms)
-                const oscClick = ctx.createOscillator();
-                const clickGain = ctx.createGain();
-                oscClick.type = 'triangle';
-                oscClick.frequency.setValueAtTime(3200, now);
-                clickGain.gain.setValueAtTime(0.4, now);
-                clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
-                oscClick.connect(clickGain);
-                clickGain.connect(masterGain);
-                oscClick.start(now);
-                oscClick.stop(now + 0.03);
-
-            } catch (e) {
-                console.warn('Procedural audio error:', e);
-            }
-        }
-
-        // Master Temple Bell (Ganta) Trigger Function
-        function playTempleGanta(type = 'left', volume = 1.0) {
-            try {
-                const ctx = getAudioContext();
-                const now = ctx.currentTime;
-
-                const isLeft = (type === 'left' || type === 'heavy');
-                const buffer = isLeft ? heavyBellBuffer : brightBellBuffer;
-
-                if (buffer) {
-                    const source = ctx.createBufferSource();
-                    source.buffer = buffer;
-
-                    const gainNode = ctx.createGain();
-                    gainNode.gain.setValueAtTime(volume * 0.95, now);
-                    gainNode.connect(ctx.destination);
-
-                    source.connect(gainNode);
-                    source.start(now);
-                    return;
-                }
-
-                // Fallback to inharmonic synthesis
-                playProceduralTempleBell(isLeft ? 466.16 : 587.33, 4.6, volume);
-
-            } catch (e) {
-                console.warn('Temple ganta play error:', e);
-            }
-        }
-
-        // Backward compatible alias
-        function playBellChime(freq = 587.33, duration = 3.5) {
-            playTempleGanta(freq < 550 ? 'left' : 'right', 0.95);
-        }
-
-        function toggleTempleMusic() {
-            const ctx = getAudioContext();
-            const soundOn = document.getElementById('soundIconOn');
-            const soundOff = document.getElementById('soundIconOff');
-            const soundText = document.getElementById('soundText');
-
-            if (!isMusicPlaying) {
-                const now = ctx.currentTime;
-                tanpuraGain = ctx.createGain();
-                tanpuraGain.gain.setValueAtTime(0.001, now);
-                tanpuraGain.gain.exponentialRampToValueAtTime(0.12, now + 2.0);
-
-                const filter = ctx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(450, now);
-
-                tanpuraOsc1 = ctx.createOscillator();
-                tanpuraOsc1.type = 'triangle';
-                tanpuraOsc1.frequency.setValueAtTime(138.59, now);
-
-                tanpuraOsc2 = ctx.createOscillator();
-                tanpuraOsc2.type = 'sine';
-                tanpuraOsc2.frequency.setValueAtTime(207.65, now);
-
-                tanpuraOsc1.connect(filter);
-                tanpuraOsc2.connect(filter);
-                filter.connect(tanpuraGain);
-                tanpuraGain.connect(ctx.destination);
-
-                tanpuraOsc1.start(now);
-                tanpuraOsc2.start(now);
-
-                isMusicPlaying = true;
-                soundOn.classList.remove('hidden');
-                soundOff.classList.add('hidden');
-                soundText.textContent = 'Drone On';
-                playBellChime(659.25, 2.5);
-            } else {
-                const now = ctx.currentTime;
-                if (tanpuraGain) {
-                    tanpuraGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.0);
-                    setTimeout(() => {
-                        try {
-                            tanpuraOsc1.stop();
-                            tanpuraOsc2.stop();
-                        } catch(e) {}
-                    }, 1000);
-                }
-                isMusicPlaying = false;
-                soundOn.classList.add('hidden');
-                soundOff.classList.remove('hidden');
-                soundText.textContent = 'Muted';
-            }
+            } catch (e) {}
         }
 
         // ==========================================
@@ -888,5 +840,20 @@
             }
         }
     </script>
+
+    <!-- REALISTIC TEMPLE GANTA AUDIO (HIGH-FIDELITY BRASS BELL SOUNDS) -->
+    <audio id="bellAudioHeavy" preload="auto">
+        <source src="assets/temple_bell_heavy.m4a" type="audio/mp4">
+        <source src="assets/temple_bell_heavy.wav" type="audio/wav">
+    </audio>
+    <audio id="bellAudioBright" preload="auto">
+        <source src="assets/temple_bell_bright.m4a" type="audio/mp4">
+        <source src="assets/temple_bell_bright.wav" type="audio/wav">
+    </audio>
+
+    <!-- YouTube Embed Player for Traditional Ganesh Aarti (Lalbaugcha Raja) -->
+    <div id="ytContainer" class="fixed bottom-2 right-2 w-1 h-1 opacity-[0.01] pointer-events-none z-0 overflow-hidden">
+        <div id="youtubePlayer"></div>
+    </div>
 </body>
 </html>
