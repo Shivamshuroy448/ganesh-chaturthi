@@ -387,43 +387,146 @@
             return audioCtx;
         }
 
-        function playBellChime(freq = 587.33, duration = 3.2) {
+        // ==========================================
+        // REALISTIC INDIAN TEMPLE GANTA AUDIO ENGINE
+        // ==========================================
+        let heavyBellBuffer = null;
+        let brightBellBuffer = null;
+        let isBellsLoading = false;
+
+        async function preloadTempleBells() {
+            if (heavyBellBuffer && brightBellBuffer) return;
+            if (isBellsLoading) return;
+            isBellsLoading = true;
+
+            try {
+                const ctx = getAudioContext();
+                const [heavyRes, brightRes] = await Promise.all([
+                    fetch('assets/temple_bell_heavy.wav'),
+                    fetch('assets/temple_bell_bright.wav')
+                ]);
+
+                if (heavyRes.ok && brightRes.ok) {
+                    const [heavyData, brightData] = await Promise.all([
+                        heavyRes.arrayBuffer(),
+                        brightRes.arrayBuffer()
+                    ]);
+                    heavyBellBuffer = await ctx.decodeAudioData(heavyData);
+                    brightBellBuffer = await ctx.decodeAudioData(brightData);
+                }
+            } catch (err) {
+                console.warn('Using procedural temple bell synthesis:', err);
+            } finally {
+                isBellsLoading = false;
+            }
+        }
+
+        // Preload on first user interaction or DOM ready
+        window.addEventListener('DOMContentLoaded', preloadTempleBells);
+        window.addEventListener('pointerdown', () => {
+            getAudioContext();
+            preloadTempleBells();
+        }, { once: true });
+
+        // Physical modeling synthesis of Indian cast bronze temple bell (fallback & procedural)
+        function playProceduralTempleBell(f0 = 520, duration = 4.8, volume = 0.9) {
             try {
                 const ctx = getAudioContext();
                 const now = ctx.currentTime;
 
-                const harmonics = [
-                    { ratio: 1.0, gain: 0.75 },
-                    { ratio: 2.02, gain: 0.45 },
-                    { ratio: 3.01, gain: 0.28 },
-                    { ratio: 4.25, gain: 0.18 },
-                    { ratio: 5.4, gain: 0.1 }
-                ];
-
                 const masterGain = ctx.createGain();
-                masterGain.gain.setValueAtTime(0.6, now);
+                masterGain.gain.setValueAtTime(volume * 0.85, now);
                 masterGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
                 masterGain.connect(ctx.destination);
 
-                harmonics.forEach(h => {
-                    const osc = ctx.createOscillator();
+                // Authentic non-integer inharmonic modes of heavy temple bells (Hum, Prime, Tierce minor-third, Quint, Nominal, Decime)
+                const modes = [
+                    { ratio: 0.50,  gain: 0.50, decay: 5.2, detune: 0.7 },
+                    { ratio: 1.00,  gain: 0.85, decay: 4.4, detune: 1.5 },
+                    { ratio: 1.186, gain: 0.65, decay: 3.9, detune: 1.8 },
+                    { ratio: 1.515, gain: 0.42, decay: 3.2, detune: 2.1 },
+                    { ratio: 2.00,  gain: 0.48, decay: 2.8, detune: 2.6 },
+                    { ratio: 2.55,  gain: 0.28, decay: 2.1, detune: 3.2 },
+                    { ratio: 3.14,  gain: 0.18, decay: 1.5, detune: 3.9 },
+                    { ratio: 4.18,  gain: 0.12, decay: 1.0, detune: 4.6 }
+                ];
+
+                modes.forEach(m => {
+                    const osc1 = ctx.createOscillator();
+                    const osc2 = ctx.createOscillator();
                     const oscGain = ctx.createGain();
 
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq * h.ratio, now);
+                    const freq = f0 * m.ratio;
+                    osc1.type = 'sine';
+                    osc1.frequency.setValueAtTime(freq, now);
 
-                    oscGain.gain.setValueAtTime(h.gain, now);
-                    oscGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * (1 / Math.sqrt(h.ratio)));
+                    osc2.type = 'sine';
+                    osc2.frequency.setValueAtTime(freq + m.detune, now);
 
-                    osc.connect(oscGain);
+                    const modeDecay = Math.min(duration, m.decay);
+                    oscGain.gain.setValueAtTime(m.gain * 0.5, now);
+                    oscGain.gain.exponentialRampToValueAtTime(0.0001, now + modeDecay);
+
+                    osc1.connect(oscGain);
+                    osc2.connect(oscGain);
                     oscGain.connect(masterGain);
 
-                    osc.start(now);
-                    osc.stop(now + duration);
+                    osc1.start(now);
+                    osc2.start(now);
+                    osc1.stop(now + modeDecay);
+                    osc2.stop(now + modeDecay);
                 });
+
+                // Clapper strike transient (short metallic clink in first 25ms)
+                const oscClick = ctx.createOscillator();
+                const clickGain = ctx.createGain();
+                oscClick.type = 'triangle';
+                oscClick.frequency.setValueAtTime(3200, now);
+                clickGain.gain.setValueAtTime(0.4, now);
+                clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+                oscClick.connect(clickGain);
+                clickGain.connect(masterGain);
+                oscClick.start(now);
+                oscClick.stop(now + 0.03);
+
             } catch (e) {
-                console.warn('Audio unavailable:', e);
+                console.warn('Procedural audio error:', e);
             }
+        }
+
+        // Master Temple Bell (Ganta) Trigger Function
+        function playTempleGanta(type = 'left', volume = 1.0) {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+
+                const isLeft = (type === 'left' || type === 'heavy');
+                const buffer = isLeft ? heavyBellBuffer : brightBellBuffer;
+
+                if (buffer) {
+                    const source = ctx.createBufferSource();
+                    source.buffer = buffer;
+
+                    const gainNode = ctx.createGain();
+                    gainNode.gain.setValueAtTime(volume * 0.95, now);
+                    gainNode.connect(ctx.destination);
+
+                    source.connect(gainNode);
+                    source.start(now);
+                    return;
+                }
+
+                // Fallback to inharmonic synthesis
+                playProceduralTempleBell(isLeft ? 466.16 : 587.33, 4.6, volume);
+
+            } catch (e) {
+                console.warn('Temple ganta play error:', e);
+            }
+        }
+
+        // Backward compatible alias
+        function playBellChime(freq = 587.33, duration = 3.5) {
+            playTempleGanta(freq < 550 ? 'left' : 'right', 0.95);
         }
 
         function toggleTempleMusic() {
@@ -489,7 +592,7 @@
             bell.classList.remove('swing-left');
             void bell.offsetWidth;
             bell.classList.add('swing-left');
-            playBellChime(587.33, 3.2);
+            playTempleGanta('left', 1.0);
         }
 
         function ringRightBell() {
@@ -497,12 +600,12 @@
             bell.classList.remove('swing-right');
             void bell.offsetWidth;
             bell.classList.add('swing-right');
-            playBellChime(659.25, 3.5);
+            playTempleGanta('right', 1.0);
         }
 
         function ringBothBells() {
             ringLeftBell();
-            setTimeout(ringRightBell, 180);
+            setTimeout(ringRightBell, 220);
             showerFlowers(25);
         }
 
@@ -542,7 +645,7 @@
 
                 let bellPitch = true;
                 aartiTimer = setInterval(() => {
-                    playBellChime(bellPitch ? 587.33 : 659.25, 2.0);
+                    playTempleGanta(bellPitch ? 'left' : 'right', 0.85);
                     bellPitch = !bellPitch;
 
                     aartiLyricIndex = (aartiLyricIndex + 1) % aartiLyrics.length;
@@ -551,7 +654,8 @@
                     showerFlowers(8);
                 }, 1600);
 
-                playBellChime(523.25, 4.0);
+                playTempleGanta('left', 1.0);
+                setTimeout(() => playTempleGanta('right', 0.95), 240);
                 showerFlowers(30);
 
             } else {
@@ -586,9 +690,8 @@
             blessingGlow.classList.remove('opacity-50');
             blessingGlow.classList.add('opacity-100', 'scale-150');
 
-            playBellChime(523.25, 2.0);
-            setTimeout(() => playBellChime(659.25, 2.5), 250);
-            setTimeout(() => playBellChime(783.99, 3.5), 500);
+            playTempleGanta('left', 0.9);
+            setTimeout(() => playTempleGanta('right', 0.95), 260);
 
             showerFlowers(60);
 
@@ -687,7 +790,7 @@
         }
 
         function triggerPulaVarsham() {
-            playBellChime(659.25, 2.2);
+            playTempleGanta('right', 0.9);
             showerFlowers(48);
         }
 
