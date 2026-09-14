@@ -15,6 +15,11 @@ An authentic, interactive 3D temple mandapam website celebrating **Vinayaka Chav
   - Personalized divine blessing card with a 1-tap **WhatsApp Share** button.
   - Persists in browser `localStorage` across visits.
 
+- **🪙 Dakshina (Donate) Offering**:
+  - Devotees can offer voluntary seva / dakshina to support server hosting and temple mandapam maintenance.
+  - Available via the sacred **Golden Hundi (Kanuka Patra)** beside Lord Ganesha's feet and the top header button.
+  - Supports Buy Me a Coffee (UPI via GPay/PhonePe, Credit/Debit cards, and Apple Pay).
+
 - **🌸 Realistic Botanical Flower Shower (Pula Varsham)**:
   - Procedural botanical petal physics with 4 sacred Indian puja flowers:
     - **Marigold (Banthi Poovu)**: Ruffled 3-lobed fan shape with saffron-orange to golden-yellow gradients.

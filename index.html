@@ -186,11 +186,16 @@
                 </div>
             </div>
 
-            <!-- Right Controls: Write Wish, Play Devotional Song & Share -->
+            <!-- Right Controls: Write Wish, Play Devotional Song, Dakshina & Share -->
             <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <button id="wishHeaderBtn" onclick="openWishModal()" class="px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-[10px] sm:text-[11px] flex items-center gap-0.5 sm:gap-1.5 transition-all shadow-md shadow-amber-500/30 flex-shrink-0 active:scale-95 border border-yellow-300/40" title="Write Your Wish to Lord Ganesha (Mee Korika / Sankalpam)">
                     <span class="text-[11px] sm:text-xs">✍️</span>
                     <span class="font-sans font-bold whitespace-nowrap"><span class="hidden md:inline">Mee </span>Wish</span>
+                </button>
+
+                <button id="dakshinaHeaderBtn" onclick="openDakshinaModal()" class="px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:from-yellow-400 hover:to-amber-400 text-slate-950 font-bold text-[10px] sm:text-[11px] flex items-center gap-0.5 sm:gap-1 transition-all shadow-md shadow-amber-500/30 flex-shrink-0 active:scale-95 border border-yellow-200/50" title="Dakshina (Donate) - Support the Virtual Mandapam & Seva">
+                    <span class="text-[11px] sm:text-xs">🪙</span>
+                    <span class="font-sans font-bold whitespace-nowrap"><span class="hidden md:inline">Dakshina </span>(Donate)</span>
                 </button>
 
                 <button id="songToggleBtn" onclick="toggleSong()" class="px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-amber-950/80 via-amber-900/80 to-red-950/80 hover:from-amber-900 hover:to-red-900 border border-amber-500/40 text-amber-200 hover:text-white transition-all flex items-center gap-0.5 sm:gap-1.5 text-[10px] sm:text-[11px] font-medium group active:scale-95 shadow-md shadow-amber-950/30 flex-shrink-0" title="Play Traditional Ganesh Aarti (Lalbaugcha Raja)">
@@ -278,6 +283,23 @@
                         <span class="font-serif text-amber-300 font-bold tracking-wide max-w-[120px] sm:max-w-[200px] truncate" id="offeredScrollBadgeText">Mee Korika Bappa Charanala Vadda</span>
                         <span class="text-[8px] sm:text-[9px] text-amber-300/90 bg-amber-500/25 px-1.5 py-0.2 rounded font-mono">View</span>
                     </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- SACRED TEMPLE HUNDI / DAKSHINA (DONATE) -->
+                <!-- ========================================== -->
+                <div id="hundiBtn" onclick="openDakshinaModal()" class="absolute -bottom-0.5 sm:bottom-0.5 left-2 sm:left-4 z-36 pointer-events-auto cursor-pointer group flex flex-col items-center select-none" title="Dakshina (Donate) - Offer Seva to Lord Ganesha">
+                    <div class="relative flex items-center justify-center">
+                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-700 p-0.5 shadow-lg shadow-amber-500/50 border border-yellow-200/80 group-hover:scale-110 group-active:scale-95 transition-all">
+                            <div class="w-full h-full rounded-full bg-stone-950/85 flex items-center justify-center text-xs sm:text-sm">
+                                🪙
+                            </div>
+                        </div>
+                        <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></span>
+                    </div>
+                    <span class="mt-0.5 px-1.5 py-0.2 rounded-full bg-stone-950/90 border border-amber-400/60 text-[8px] sm:text-[9px] font-bold text-amber-300 tracking-wide font-serif whitespace-nowrap shadow-md group-hover:border-yellow-300 group-hover:text-yellow-200 transition-colors">
+                        Dakshina (Donate)
+                    </span>
                 </div>
 
                 <!-- ========================================== -->
@@ -434,6 +456,82 @@
                             <span>WhatsApp</span>
                         </button>
                     </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SACRED DAKSHINA (DONATE) MODAL -->
+        <div id="dakshinaModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none">
+            <div id="dakshinaModalCard" class="glass-gold w-full max-w-md rounded-2xl sm:rounded-3xl border-2 border-amber-400/80 shadow-2xl p-4 sm:p-6 relative text-center transform transition-all duration-300 scale-95 max-h-[92vh] overflow-y-auto">
+                
+                <!-- Close Button -->
+                <button onclick="closeDakshinaModal()" class="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 w-7 h-7 rounded-full bg-amber-950/80 border border-amber-500/40 text-amber-300 hover:text-white flex items-center justify-center text-sm transition-colors" title="Close">✕</button>
+
+                <!-- Top Sacred Emblem -->
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-amber-400 text-sm">🪔</span>
+                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 flex items-center justify-center text-lg sm:text-xl shadow-md shadow-amber-500/40 border border-yellow-200/80">
+                        🪙
+                    </div>
+                    <span class="text-amber-400 text-sm">🪔</span>
+                </div>
+
+                <h2 class="text-base sm:text-xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-100">
+                    Dakshina (Donate)
+                </h2>
+                <p class="text-[10px] sm:text-xs text-amber-300/85 font-serif mt-0.5">
+                    Sri Ganesha Seva, Mandapam Hosting & Server Maintenance 🙏
+                </p>
+
+                <!-- Devotional Seva Note -->
+                <div class="mt-3 p-3 rounded-xl bg-amber-950/60 border border-amber-500/30 text-left text-[11px] sm:text-xs text-amber-100/90 leading-relaxed font-sans">
+                    <p>
+                        Mee sahakaramtho ee divine virtual darshan prapanchamlo unna lakshaladi bhakthulaku andubaatulo untundi. Your kind contribution helps keep the virtual mandapam running smoothly.
+                    </p>
+                </div>
+
+                <!-- Seva Offerings Tiers -->
+                <div class="mt-3 space-y-2">
+                    <div class="grid grid-cols-3 gap-1.5 sm:gap-2 text-center">
+                        <div class="p-2 rounded-xl bg-black/50 border border-amber-500/30 flex flex-col items-center justify-center">
+                            <span class="text-base sm:text-lg">🥟</span>
+                            <span class="text-[10px] sm:text-xs font-bold text-amber-300 font-mono mt-0.5">1 Modak</span>
+                            <span class="text-[8px] sm:text-[9px] text-amber-400/70">₹51 / $1</span>
+                        </div>
+                        <div class="p-2 rounded-xl bg-amber-950/70 border border-amber-400/60 flex flex-col items-center justify-center shadow-md shadow-amber-500/20">
+                            <span class="text-base sm:text-lg">🥟🥟</span>
+                            <span class="text-[10px] sm:text-xs font-bold text-yellow-300 font-mono mt-0.5">3 Modaks</span>
+                            <span class="text-[8px] sm:text-[9px] text-yellow-400/80">₹151 / $3</span>
+                        </div>
+                        <div class="p-2 rounded-xl bg-black/50 border border-amber-500/30 flex flex-col items-center justify-center">
+                            <span class="text-base sm:text-lg">🥟🥟🥟</span>
+                            <span class="text-[10px] sm:text-xs font-bold text-amber-300 font-mono mt-0.5">5 Modaks</span>
+                            <span class="text-[8px] sm:text-[9px] text-amber-400/70">₹251 / $5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Action CTA: Buy Me a Coffee / Ko-fi -->
+                <div class="mt-3.5 space-y-2">
+                    <a href="https://buymeacoffee.com/shivamshuroy448" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/30 active:scale-95 transition-all border border-yellow-200">
+                        <span class="text-sm sm:text-base">☕</span>
+                        <span>Offer Dakshina via Buy Me a Coffee</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                    <p class="text-[8px] sm:text-[9px] text-amber-400/70 text-center">
+                        Supports UPI (GPay/PhonePe/Paytm), Credit/Debit Cards & Apple Pay (100% Secure)
+                    </p>
+                </div>
+
+                <!-- Auspicious Slokam Footer -->
+                <div class="mt-3 pt-2.5 border-t border-amber-500/20 text-center">
+                    <p class="text-[9px] sm:text-[10px] text-amber-300 font-serif italic">
+                        "Sarva Mangala Mangalye Shive Sarvartha Sadhike"
+                    </p>
+                    <p class="text-[8px] sm:text-[9px] text-amber-400/60 font-mono mt-0.5">
+                        May Vignaharta bless you and your family with peace & prosperity! 🙏
+                    </p>
                 </div>
 
             </div>
@@ -881,6 +979,29 @@
         function closeWishModal() {
             const modal = document.getElementById('wishModal');
             const card = document.getElementById('wishModalCard');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // ==========================================
+        // DAKSHINA (DONATE) MODAL LOGIC
+        // ==========================================
+        function openDakshinaModal() {
+            playTempleGanta('right', 0.85);
+            showerFlowers(15);
+            const modal = document.getElementById('dakshinaModal');
+            const card = document.getElementById('dakshinaModalCard');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+        }
+
+        function closeDakshinaModal() {
+            const modal = document.getElementById('dakshinaModal');
+            const card = document.getElementById('dakshinaModalCard');
             card.classList.remove('scale-100');
             card.classList.add('scale-95');
             modal.classList.remove('opacity-100', 'pointer-events-auto');
